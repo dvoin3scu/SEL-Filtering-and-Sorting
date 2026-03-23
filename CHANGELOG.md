@@ -14,7 +14,7 @@
   - New: `Bad 4k Bluray` to remove only 4k Bluray (conditions loosened vs `Upscaled 4k`)
   - New: `No DV Bluray (P7)` (disabled) courtesy of Vidhin, now added onto Template's Device Specific Exclusions as selectable option
   - Update: `Upscaled 4k` now removes everything in 4K if triggered
-    - Will this auto-update? If currently disabled in your synced URL (and present inside your main ESE field) then you'll need to manually reimport template. 
+    - Will this auto-update? If currently disabled in your synced URL (and present inside your main ESE field) then you'll need to manually reimport template.
   - Update: `0Cached` ISE to include non-debrid sources (http, p2p & usenet) in its conditional check
     - If triggered (0 cached results found), title matching is skipped/passthrough to show potentially filtered results
     - Will this auto-update? Yes
@@ -45,99 +45,100 @@
 - Formatter:
   - New `Tamtaro (Minimalist)`, further stripped down view of default. Added to both Complete/Partial template.
   - Default & AppleTV format: now hides rseMatched `UHD` and `HD` portion in eg., `UHD Remux T1`
-  
+
 ## 2.1.6 (2026-03-09)
- - Update: Added *DV (ALL)* into `Device Specific Exclusions` for devices that can't use HDR fallback
- - Update: Custom option for Bitrate Limit, to enter your custom number outside the 5 options
+
+- Update: Added _DV (ALL)_ into `Device Specific Exclusions` for devices that can't use HDR fallback
+- Update: Custom option for Bitrate Limit, to enter your custom number outside the 5 options
 
 ## 2.1.5 (2026-03-09)
- - Update: Added *HDR10+ Only* into `Device Specific Exclusions` for playback issues on some older TLC TVs + Firestick
+
+- Update: Added _HDR10+ Only_ into `Device Specific Exclusions` for playback issues on some older TLC TVs + Firestick
 
 ## 2.1.4 (2026-03-09)
 
- - New: Added new multi-select `Device Specific Exclusions` for streams your device can't handle
-   - All 4k, 4k-720P Remux, DTS, TrueHD, DV-Only, HDR, DV-Only Non-Remux
-     - Some LG TVs can't play any Remux, TrueHD, or DTS audio. Some Samsung TVs can't play DTS audio. Some devices can't play DV-Only Non-Remux (DV P5). Some devices can't play any 4K streams. Select appropriate exclusions right here, and not inside AIOS UI filter because these removals need to happen at specific stage in the SEL filering process to allow various fake/upscaled detection filters to work effectively.
-   - Any selection will enable the corresponding synced url ESE (which also got updated to v1.2.0), to ensure they run after bad 4k/bluray SELs.
+- New: Added new multi-select `Device Specific Exclusions` for streams your device can't handle
+  - All 4k, 4k-720P Remux, DTS, TrueHD, DV-Only, HDR, DV-Only Non-Remux
+    - Some LG TVs can't play any Remux, TrueHD, or DTS audio. Some Samsung TVs can't play DTS audio. Some devices can't play DV-Only Non-Remux (DV P5). Some devices can't play any 4K streams. Select appropriate exclusions right here, and not inside AIOS UI filter because these removals need to happen at specific stage in the SEL filering process to allow various fake/upscaled detection filters to work effectively.
+  - Any selection will enable the corresponding synced url ESE (which also got updated to v1.2.0), to ensure they run after bad 4k/bluray SELs.
 - Update: Global timeout now set to 5000 ms
-   - Increase if you get too many timeouts and want to see more results
+  - Increase if you get too many timeouts and want to see more results
 - Minor: Removed `☑ NZB-Only` optional SEL since the passthrough alternatives (`☑ NZB Passthrough` and `☑ NZB-Only Passthrough`) are better anyway
 
 ## 2.1.3 (2026-03-08)
 
- - New: Addon name field under Misc Options, and versioning built into addon description.
-    - Defaults to AIOStreams, with select few options to choose from as suggested by #The SELebrities on discord (so you can blame them)
-       - Don't like any of them? Good news! You can enter your own creativity right there in the menu
-    - Choose "Keep existing name" to not replace your existing name
+- New: Addon name field under Misc Options, and versioning built into addon description.
+  - Defaults to AIOStreams, with select few options to choose from as suggested by #The SELebrities on discord (so you can blame them)
+    - Don't like any of them? Good news! You can enter your own creativity right there in the menu
+  - Choose "Keep existing name" to not replace your existing name
 
 ## 2.1.2 (2026-03-08)
 
- - Fixed: previously added Searchⁿᶻᵇ(Torbox) addon will now be removed in future re-importing of template when Torbox Service is not selected
- - Minor: Edited some headers and descriptions to organize template menu better
+- Fixed: previously added Searchⁿᶻᵇ(Torbox) addon will now be removed in future re-importing of template when Torbox Service is not selected
+- Minor: Edited some headers and descriptions to organize template menu better
 
 ## 2.1.1 (2026-03-07)
 
- - Fixed: bitrate cap SEL now working
- - Fixed: Subtitle addon now adds to your setup when language is selected
- - Minor: Removed extra sootio library ESE filter
+- Fixed: bitrate cap SEL now working
+- Fixed: Subtitle addon now adds to your setup when language is selected
+- Minor: Removed extra sootio library ESE filter
 
 ## 2.1.0 (2026-03-07)
 
- - New: quick links for SEL content
-    - SEL Setup
-       - https://git.tamtaro.de (Main GitHub)
-       - https://git.tamtaro.de/complete.json
-       - https://git.tamtaro.de/changelog
-       - https://git.tamtaro.de/viren-guide
-    - AIOStreams instance
-       - https://git.tamtaro.de/yeb, https://git.tamtaro.de/yeb-stable
-       - https://git.tamtaro.de/midnight, https://git.tamtaro.de/midnight-stable
-       - https://git.tamtaro.de/kuu, https://git.tamtaro.de/kuu-stable
-       - https://git.tamtaro.de/viren (nightly)
-       - https://git.tamtaro.de/omni (stable)
-       - https://git.tamtaro.de/atbphosting (stable)
-       - https://git.tamtaro.de/elfhosted (stable)
-     - Synced URLs (for selfhosters)
-        - https://git.tamtaro.de/ISE.json
-        - https://git.tamtaro.de/PSE.json
-        - https://git.tamtaro.de/ESE-extended.json
-        - https://git.tamtaro.de/ESE-standard.json
- - New: Subtitle Addon option, select a language for the OpenSubtitles V3+ addon to be added
- - Update: `4K Remux` and `1080P Remux` now run *after* core SEL fake bluray filters, so having no remux shouldn't cause false positive anymore
-    - Achieved by use of SEL override, enabling the corresponding remux filter inside the synced ESE list
- - Update: Reworked sort order, clearer distinctions.
-    - P2P and Boost Uncached Usenet Sort Order will be Global Only
-    - Debrid/Usenet will remain Cached + Uncached
+- New: quick links for SEL content
+  - SEL Setup
+    - https://git.tamtaro.de (Main GitHub)
+    - https://git.tamtaro.de/complete.json
+    - https://git.tamtaro.de/changelog
+    - https://git.tamtaro.de/viren-guide
+  - AIOStreams instance
+    - https://git.tamtaro.de/yeb, https://git.tamtaro.de/yeb-stable
+    - https://git.tamtaro.de/midnight, https://git.tamtaro.de/midnight-stable
+    - https://git.tamtaro.de/kuu, https://git.tamtaro.de/kuu-stable
+    - https://git.tamtaro.de/viren (nightly)
+    - https://git.tamtaro.de/omni (stable)
+    - https://git.tamtaro.de/atbphosting (stable)
+    - https://git.tamtaro.de/elfhosted (stable)
+  - Synced URLs (for selfhosters)
+    - https://git.tamtaro.de/ISE.json
+    - https://git.tamtaro.de/PSE.json
+    - https://git.tamtaro.de/ESE-extended.json
+    - https://git.tamtaro.de/ESE-standard.json
+- New: Subtitle Addon option, select a language for the OpenSubtitles V3+ addon to be added
+- Update: `4K Remux` and `1080P Remux` now run _after_ core SEL fake bluray filters, so having no remux shouldn't cause false positive anymore
+  - Achieved by use of SEL override, enabling the corresponding remux filter inside the synced ESE list
+- Update: Reworked sort order, clearer distinctions.
+  - P2P and Boost Uncached Usenet Sort Order will be Global Only
+  - Debrid/Usenet will remain Cached + Uncached
 
 ## 2.0.10 (2026-03-07)
 
- - New/Update: Bitrate Options Submenu: Bitrate Limit
-    - Check out [Avangelista's PR](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting/pull/12) for more details
-    - `Low Bitrate Ranking Boost` deprioritizes streams outside bitrate limit via PSE
-    - `Low Bitrate Sorting Boost` sorts bitrate within same resolution/quality category from lowest to highest
+- New/Update: Bitrate Options Submenu: Bitrate Limit
+  - Check out [Avangelista's PR](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting/pull/12) for more details
+  - `Low Bitrate Ranking Boost` deprioritizes streams outside bitrate limit via PSE
+  - `Low Bitrate Sorting Boost` sorts bitrate within same resolution/quality category from lowest to highest
 
 ## 2.0.9 (2026-03-05)
 
 - Update: Service wrap is now enabled only for Torrentio. This prevents Torrentio from returning results when the Torrentio service is down.
 - Fix: `Pin Top 1 Resolution` & `Pin Top 1 Resolution/Quality` now properly returns Library stream if library stream happens to be sorted on top.
-    - If you don't want Top 1 to always pick your library stream (as that defaults to top sort), then you may need to choose No Library Boost under Sort Option
+  - If you don't want Top 1 to always pick your library stream (as that defaults to top sort), then you may need to choose No Library Boost under Sort Option
 - Partial Template Update: New option to "Import Only Synced URLs".
-    - If selected, this will import only the synced URLs for your core filter selection, keeping your existing regular SEL fields intact (such as optional SELs from the Complete Setup or manual additions).
+  - If selected, this will import only the synced URLs for your core filter selection, keeping your existing regular SEL fields intact (such as optional SELs from the Complete Setup or manual additions).
 
 ## 2.0.8 (2026-03-04)
 
 - Update: Integrated changelog directly into templates.
 - Update: Usenet overhaul; all Usenet options are now under their own main header.
-    - New Boost Uncached Usenet to alter how uncached Usenet vs. Debrid content sorting is handled.
-    - Selecting "Boost Uncached Usenet" will move all sorting to 'Global' only.
-    - Selecting either Usenet sort option adds an extra SEL in preferred stream expressions to merge Usenet/Debrid results.
+  - New Boost Uncached Usenet to alter how uncached Usenet vs. Debrid content sorting is handled.
+  - Selecting "Boost Uncached Usenet" will move all sorting to 'Global' only.
+  - Selecting either Usenet sort option adds an extra SEL in preferred stream expressions to merge Usenet/Debrid results.
 - Formatter: Added a modified version for Stremio on Apple TV (thanks to @dividedby & @stepthomas) in the formatter choice selection.
 - Fixed: Bug with Usenet passthrough always adding SEL when nothing is selected.
 
 ## 2.0.7 (2026-03-04)
 
 - Change: Service wrap turned off due to issues in some AIOStreams instances.
-
 
 ## 2.0.6 (2026-03-03)
 
@@ -217,8 +218,8 @@ There are now only two templates: _Tamtaro Complete SEL Setup_ and _Tamtaro Part
 
 - Addons Options
   - Each mode comes with a preset of recommended addons:
-  - P2P Setup (No services selected): _Meteor, Comet, StremThru, TorzS, MediaFusion, Torrentio, TorrentsDB, Peerflix, Sootio, Nuvio Streams, Nuvio Anime, WebStreamr_
-  - Debrid Mode (Services Selected): _SeaDex, Library, Meteor, Comet, STorz, Torrentio, MediaFusion, Knaben, AnimeTosho, Sootio_
+  - P2P Setup (No services selected): _Meteor, Comet, StremThru, Torz, MediaFusion, Torrentio, TorrentsDB, Peerflix, Sootio, Nuvio Streams, Nuvio Anime, WebStreamr_
+  - Debrid Mode (Services Selected): _SeaDex, Library, Meteor, Comet, Torz, Torrentio, MediaFusion, Knaben, AnimeTosho, Sootio_
 - Dynamic Addon Options in the Wizard
   - TorBox Search is automatically added if you select Torbox service, and add the NZB version if Pro tier is selected during onboarding.
   - Selecting "No Anime" in the wizard will remove Anime Addons and related anime config from your final build.
@@ -238,11 +239,11 @@ There are now only two templates: _Tamtaro Complete SEL Setup_ and _Tamtaro Part
     - Debrid/Usenet : _SeaDex → Resolution → Quality → Library → Stream Expression → Stream Expression Score → Language → Encode → Bitrate → Seeders_.
     - P2P Setup: _SeaDex → Resolution → Quality → Library → Stream Expression → Stream Expression Score → Seeders → Language → Encode → Bitrate_.
   - You can fine-tune the Sort Order by applying "Boosts" to specific categories
-      - Library Boost: Prioritizes streams already in your library within each category. This is useful for quickly identifying specific episodes or manually added content.
-      - Language Boost: Gives priority to streams matching your "Preferred Languages". Higher boosts may rank lower-quality streams higher if they contain your preferred language.
-      - SEL Score Boost: Prioritizes results with higher SEL scores, regardless of resolution or quality.
-      - Seeders Boost (P2P Only): Ensures streams with the highest seeder counts appear at the top.
-    ┈┈┈┈┈┈┈┈․° ☣ °․┈┈┈┈┈┈┈┈
+    - Library Boost: Prioritizes streams already in your library within each category. This is useful for quickly identifying specific episodes or manually added content.
+    - Language Boost: Gives priority to streams matching your "Preferred Languages". Higher boosts may rank lower-quality streams higher if they contain your preferred language.
+    - SEL Score Boost: Prioritizes results with higher SEL scores, regardless of resolution or quality.
+    - Seeders Boost (P2P Only): Ensures streams with the highest seeder counts appear at the top.
+      ┈┈┈┈┈┈┈┈․° ☣ °․┈┈┈┈┈┈┈┈
 
 - Recommended Optional SELs
   - You can now select these SELs to be added directly inside your config. No more copy-pasting and editing them off GitHub.
@@ -265,5 +266,6 @@ There are now only two templates: _Tamtaro Complete SEL Setup_ and _Tamtaro Part
 That's it for this All-in-One Complete template. Most Optional SELs can be added right inside the Template Wizard. Lots of options to play around with, dozens of unique setup possible. The Partial Setup template has just the SEL Only and the Formatter only, so nothing else in your config will get changed.
 
 ### Direct Links
-* [**Yeb's Nightly**](https://aiostreams-nightly.fortheweak.cloud/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**Kuu's Nightly**](https://aiostreams-nightly.206111.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)| [**Midnight's Nightly**](https://aiostreamsfortheweebs.midnightignite.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**Viren's Nightly**](https://aiostreams.viren070.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
-* [**OMNI**](https://aiostreams.12312023.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**ATBP Hosting**](https://aio.atbphosting.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**StremioFR**](https://aiostreams.stremiofr.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | \[[**ElfHosted**](https://aiostreams.elfhosted.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) ⚠️ (*No P2P/Torrentio*)\]
+
+- [**Yeb's Nightly**](https://aiostreams-nightly.fortheweak.cloud/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**Kuu's Nightly**](https://aiostreams-nightly.206111.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)| [**Midnight's Nightly**](https://aiostreamsfortheweebs.midnightignite.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**Viren's Nightly**](https://aiostreams.viren070.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
+- [**OMNI**](https://aiostreams.12312023.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**ATBP Hosting**](https://aio.atbphosting.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**StremioFR**](https://aiostreams.stremiofr.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | \[[**ElfHosted**](https://aiostreams.elfhosted.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) ⚠️ (_No P2P/Torrentio_)\]

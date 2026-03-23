@@ -1,15 +1,15 @@
 {
   "metadata": {
-    "id": "tamtaro.partial",
-    "name": "Tamtaro Partial SEL Setup",
+    "id": "tamtaro.dvoin3scu.partial",
+    "name": "Tamtaro Partial SEL Setup (dvoin3scu flavor)",
     "description": "A focused template for importing partial aspects of Tamtaro SEL Setup, without overriding your existing configurations. Use this 'Partial' template if you want to keep your current setup but upgrade your filtering and sorting logic. \n* **Core Filtering Engine**: Choose between **Standard** (keeps top 3 streams per Quality/Resolution, approx. 20 total) or **Extended** (keeps top 6, approx. 40 total) to eliminate clutter while maintaining quality coverage.\n* **Synced URL Integration**: Automatically pulls the latest synced URLs for Excluded, Included, and Preferred Stream Expressions from [GitHub](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting).\n* To use Preferred Stream Expressions, ensure 'Stream Expressions' is added to your Sort Order.\n* **Custom Formatter Only**: Includes the custom Tamtaro formatter with options for a clean look or a full debug view (RSE Matched).",
     "source": "external",
-    "author": "Tamtaro",
-    "version": "2.2.0",
+    "author": "dvoin3scu",
+    "version": "2.2.1",
     "category": "AIO",
     "serviceRequired": false,
     "services": [],
-    "changelogUrl": "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/CHANGELOG.md",
+    "changelogUrl": "https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/CHANGELOG.md",
     "inputs": [
       {
         "id": "header.intro1",
@@ -38,7 +38,7 @@
         "description": "This will import only the formatter used in Complete SEL Setup. **Tamtaro (Full RSE Matched)** keeps all matched Vidhin regex tags in the last line, useful for debugging scores. **Tamtaro (default)** strips audio/video tags from the rseMatched line for a cleaner look. **Tamtaro (Minimalist)** provides a further stripped-down view. **AppleTV Stremio** (dividedby & stepthomas) modified version to fit the 4-line format on tvOS. **None** retains your existing formatter.",
         "type": "select",
         "required": false,
-        "default": "retain",
+        "default": "default",
         "options": [
           {
             "value": "retain",
@@ -75,7 +75,7 @@
         "description": "The core filtering engine used in Complete SEL Setup is the Standard SEL, which dynamically keeps top 3 per Quality/Resolution, resulting in about 20 total streams. Choose the Extended SEL option to keep 2x more (top 6 per Quality/Resolution).",
         "type": "select",
         "required": false,
-        "default": "none",
+        "default": "standard",
         "options": [
           {
             "value": "none",
@@ -107,11 +107,7 @@
         "socials": [
           {
             "id": "github",
-            "url": "https://github.com/Tam-Taro/SEL-Filtering-and-Sorting"
-          },
-          {
-            "id": "ko-fi",
-            "url": "https://ko-fi.com/tamtaro"
+            "url": "https://git.tamtaro.de"
           }
         ]
       }
@@ -119,7 +115,7 @@
   },
   "config": {
     "addonDescription": "Custom AIOStreams powered by Tamtaro SEL Setup v2.2.0. Features advanced filtering with Stream Expression Language and smart sorting with Vidhin's Regex Patterns. Your personal all-in-one setup for the perfect Stremio experience.",
-    "addonLogo": "https://github.com/Tam-Taro/SEL-Filtering-and-Sorting/blob/main/logo.png?raw=true",
+    "addonLogo": "https://github.com/dvoin3scu/SEL-Filtering-and-Sorting/blob/main/logo.png?raw=true",
     "formatter": {
       "__switch": "inputs.formatterChoice",
       "cases": {
@@ -160,10 +156,10 @@
       "__switch": "inputs.coreFilter",
       "cases": {
         "standard": [
-          "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-PSEs.json"
+          "https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-PSEs.json"
         ],
         "extended": [
-          "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-PSEs.json"
+          "https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-PSEs.json"
         ],
         "none": {
           "__remove": true
@@ -174,10 +170,10 @@
       "__switch": "inputs.coreFilter",
       "cases": {
         "standard": [
-          "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-standard.json"
+          "https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-standard.json"
         ],
         "extended": [
-          "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-extended.json"
+          "https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-extended.json"
         ],
         "none": {
           "__remove": true
@@ -188,10 +184,10 @@
       "__switch": "inputs.coreFilter",
       "cases": {
         "standard": [
-          "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ISEs.json"
+          "https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ISEs.json"
         ],
         "extended": [
-          "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ISEs.json"
+          "https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ISEs.json"
         ],
         "none": {
           "__remove": true
