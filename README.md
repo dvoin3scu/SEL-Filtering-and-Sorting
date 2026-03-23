@@ -1,5 +1,8 @@
 # SEL-Filtering-and-Sorting
 
+> [!NOTE]
+> **This is a personal fork of [Tam-Taro](https://github.com/Tam-Taro)'s [SEL-Filtering-and-Sorting](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting).** All credit for the regex patterns, expression design, and scoring logic goes to him. I created this fork solely to maintain a centralized, fully importable version of his SEL-drive AIOStreams setup templates, with minor adjustments tailored to my personal requirements. Please visit and support the original repository for upstream updates.
+
 Tired of Stremio pages flooded with streams you'll never use? My SEL-driven AIOStreams setup keeps all the good stuff while hiding the clutter. It started as a personal project during the early v2 AIOStreams betas, when I wanted one config I could share with family and friends: mid-resolution options for slower devices, premium remuxes for my own setup, all in a single, smart template.
 
 With [Stream Expression Language (SEL)](https://github.com/Viren070/AIOStreams/wiki/Stream-Expression-Language) in AIOStreams, that "perfect balance" finally became possible. After months of tinkering, testing new features, chasing bugs, and trading tips in the [AIOStreams Discord](https://discord.gg/zRq8dVh5rJ), this guide shares my day-to-day config plus ready-to-import templates focused on SEL filtering and sensible sorting.
@@ -13,9 +16,10 @@ Use this setup as-is, or as a base to tweak for your tastes. It's especially use
 - Spent hours fiddling with priorities/sort orders and still aren't happy? This is tried and tested already, so you can import to see for yourself, then adjust instead of starting from scratch.
 
 > [!IMPORTANT]
-> 1. My AIOStreams template *does not* include any catalogs. This is because many of us prefer AIOMetadata (separate addon from AIOStreams), so just scroll down to the [AIOMetadata section](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#%EF%B8%8F-whats-included-for-aiometadata) for all your metadata and catalog management needs.
 >
+> 1. My AIOStreams template _does not_ include any catalogs. This is because many of us prefer AIOMetadata (separate addon from AIOStreams), so just scroll down to the [AIOMetadata section](https://github.com/dvoin3scu/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#%EF%B8%8F-whats-included-for-aiometadata) for all your metadata and catalog management needs.
 > 2. While my AIOStreams template works on stable AIOStreams, I suggest nightly AIOStreams to receive the latest cool features immediately. You can choose a nightly AIOStreams as found on [this page](https://status.dinsden.top/status/stremio-addons). If selfhosting, change your container tag from :latest to :nightly, and do `docker compose up -d --force-recreate --pull always aiostreams`.
+
   <details>
         <summary>PS. I just switched to TorBox on their BF deal, so now I can share my code like everyone else woo!! For the best stremio experience, you need a debrid service, and TB is current top recommendation especially if you're like me, and like to share your stremio setup with family and friends. </summary></summary>
   
@@ -25,27 +29,37 @@ Use this setup as-is, or as a base to tweak for your tastes. It's especially use
   </details>
 
 ---
+
 ## Quick Setup Overview
+
 1. Choose an AIOStreams instance from [this page](https://status.dinsden.top/status/stremio-addons) or click the link below to directly access my template. Nightly is recommended but not required.
-2. [Import templates](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#-how-to-import): Paste `https://git.tamtaro.de/complete.json` into *AIOStreams → Save & Install :floppy_disk: → Import Template*
+2. [Import templates](https://github.com/dvoin3scu/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#-how-to-import): Paste `https://git.tamtaro.de/complete.json` into _AIOStreams → Save & Install :floppy_disk: → Import Template_
 
 > [!NOTE]
-> * [**Yeb's Nightly**](https://aiostreams-nightly.fortheweak.cloud/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**Kuu's Nightly**](https://aiostreams-nightly.206111.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)| [**Midnight's Nightly**](https://aiostreamsfortheweebs.midnightignite.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**Viren's Nightly**](https://aiostreams.viren070.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
-> * [**OMNI**](https://aiostreams.12312023.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**ATBP Hosting**](https://aio.atbphosting.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**StremioFR**](https://aiostreams.stremiofr.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | \[[**ElfHosted**](https://aiostreams.elfhosted.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) ⚠️ (*No P2P/Torrentio*)\]
-   - Start with "Tamtaro Complete SEL Setup" which has options for both Debrid/Usenet or P2P users.
-   - Select your debrid services (skip for P2P), and follow the customization steps that appear to personalize your setup.
-   - TMDB and TVDB credentials are required for matching, bitrate and other features.
-   - Load Template, Save your AIOStreams into Stremio.
+>
+> - [**Yeb's Nightly**](https://aiostreams-nightly.fortheweak.cloud/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**Kuu's Nightly**](https://aiostreams-nightly.206111.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)| [**Midnight's Nightly**](https://aiostreamsfortheweebs.midnightignite.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**Viren's Nightly**](https://aiostreams.viren070.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
+> - [**OMNI**](https://aiostreams.12312023.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**ATBP Hosting**](https://aio.atbphosting.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | [**StremioFR**](https://aiostreams.stremiofr.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) | \[[**ElfHosted**](https://aiostreams.elfhosted.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) ⚠️ (_No P2P/Torrentio_)\]
+
+- Start with "Tamtaro Complete SEL Setup" which has options for both Debrid/Usenet or P2P users.
+- Select your debrid services (skip for P2P), and follow the customization steps that appear to personalize your setup.
+- TMDB and TVDB credentials are required for matching, bitrate and other features.
+- Load Template, Save your AIOStreams into Stremio.
+
 4. Advanced setup after template import:
-  - Browse complete list of [Optional SELs](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#-optional-sels), most of which are incoroprated into the Template Wizard.  
-  - Adjust Ranked Stream Expressions score as you wish for more nuanced sorting. See ⁠his [GitHub](https://github.com/Vidhin05/Releases-Regex) for more details on customization.
-  - Add usenet addons or others you find useful.
-5. [AIOMetadata for catalogs/meta](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#%EF%B8%8F-whats-included-for-aiometadata): Import one of my JSONs (with/without anime) via trusted AIOMetadata instances from [this page](https://status.dinsden.top/status/stremio-addons). 
-  - Refer to full AIOMetadata guide at end of page.
+
+- Browse complete list of [Optional SELs](https://github.com/dvoin3scu/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#-optional-sels), most of which are incoroprated into the Template Wizard.
+- Adjust Ranked Stream Expressions score as you wish for more nuanced sorting. See ⁠his [GitHub](https://github.com/Vidhin05/Releases-Regex) for more details on customization.
+- Add usenet addons or others you find useful.
+
+5. [AIOMetadata for catalogs/meta](https://github.com/dvoin3scu/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#%EF%B8%8F-whats-included-for-aiometadata): Import one of my JSONs (with/without anime) via trusted AIOMetadata instances from [this page](https://status.dinsden.top/status/stremio-addons).
+
+- Refer to full AIOMetadata guide at end of page.
+
 ---
+
 ## ✨ Release Notes
 
-### For latest updates to template, see the [CHANGELOG.md](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting/blob/main/CHANGELOG.md)
+### For latest updates to template, see the [CHANGELOG.md](https://github.com/dvoin3scu/SEL-Filtering-and-Sorting/blob/main/CHANGELOG.md)
 
 <details>
  <summary>v2.0.0 - 2.0.6 </summary>
@@ -59,135 +73,131 @@ Use this setup as-is, or as a base to tweak for your tastes. It's especially use
 - minor: updated various menu descriptions for clarity
 - minor: cleaned up formatter for 'external downloader' view
 
-v2.0.5 
-- fixed: anime only language pin wrong syntax, causing error on saving @blarns 
-- fixed: sel urls being overridden in partial template when no sel selected @heinzgruber. 
+v2.0.5
+
+- fixed: anime only language pin wrong syntax, causing error on saving @blarns
+- fixed: sel urls being overridden in partial template when no sel selected @heinzgruber.
 - new: added ☑ ɴᴢʙ Passthrough and ☑ ɴᴢʙ-Only Passthrough
 - minor: edited Boost Cached Usenet description
 - minor: a missing space after ᴀʟᴛ ʙᴇsᴛ ʀᴇʟᴇᴀsᴇ in formatter @archdukeofsalt
 
 v2.0.4
-- fixed: pin/passthrough selection not being detected and their SELs not being inserted @shmoush. 
+
+- fixed: pin/passthrough selection not being detected and their SELs not being inserted @shmoush.
   - instead of inputs.something == true, switched to use the variable directly
 
 v2.0.3
-- fixed: 4k remux not working (by moving it from ReSE to ESE field) @pedronolix64gomes 
+
+- fixed: 4k remux not working (by moving it from ReSE to ESE field) @pedronolix64gomes
 
 v2.0.2
+
 - update: set default language passthrough amount to 5, still adjustable if you wish
 - fixed: removed placeholder `streams` field off ReSE which previously prevented additional Limit SELs from working
 
- v2.0.1
-- fixed: ReSE visual tags passthrough wrong syntax, causing error on saving @stevenhxo 
+v2.0.1
+
+- fixed: ReSE visual tags passthrough wrong syntax, causing error on saving @stevenhxo
 
 March 2, 2026: v2.0.0
 
 **Cross-posts with my Discord Post. Release Notes for v2.0.0.**
 
-Yoooo @The SELebrities ! I got a big template update for y'all. With the help of our lord and saviour Viren the Third (don't ask what happened to the first and second...), I’ve completely overhauled our AIOStreams SEL Templates! You no longer need to hunt through dozens of different versions of the same thing. It makes your life easy, it makes my life even easier. Took a long time but I've finished integrating most parts of my complicated setup into the new Template Wizard. It's gonna guide you through a custom setup during import process. Options galore!  As always, you know what to do. Try the updated template, leave your feedback and requests over at [Discussion](https://discord.com/channels/1225024298490662974/1391478569607368924) thread.  Drop a [coffee](https://ko-fi.com/tamtaro) on your way out if you appreciate the work. 
+Yoooo @The SELebrities ! I got a big template update for y'all. With the help of our lord and saviour Viren the Third (don't ask what happened to the first and second...), I’ve completely overhauled our AIOStreams SEL Templates! You no longer need to hunt through dozens of different versions of the same thing. It makes your life easy, it makes my life even easier. Took a long time but I've finished integrating most parts of my complicated setup into the new Template Wizard. It's gonna guide you through a custom setup during import process. Options galore! As always, you know what to do. Try the updated template, leave your feedback and requests over at [Discussion](https://discord.com/channels/1225024298490662974/1391478569607368924) thread. Drop a [coffee](https://ko-fi.com/tamtaro) on your way out if you appreciate the work.
 
-To get the technical stuff out of the way, if you're an instance hosters or selfhosters, @nhyyeb @midnightignite @kuukuuma @viren_7  @funkypenguin.co.nz @srvl @a.ves,  ensure these are already in your ENV:
-TEMPLATE_URLS=["https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/refs/heads/main/all-templates.json"]
+To get the technical stuff out of the way, if you're an instance hosters or selfhosters, @nhyyeb @midnightignite @kuukuuma @viren_7 @funkypenguin.co.nz @srvl @a.ves, ensure these are already in your ENV:
+TEMPLATE_URLS=["https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/refs/heads/main/all-templates.json"]
 TEMPLATE_REFRESH_INTERVAL=3600 #1 hour. Default: 86400 (1 day)
 WHITELISTED_SYNC_REFRESH_INTERVAL=3600 #1 hour. Default: 86400 (1 day)
 
 - If you like my template (I know you will), then you can pin/feature it along with Vidhin template in AIOStreams landing page with:
-FEATURED_TEMPLATE_IDS=tamtaro.complete,Vidhin05.english-template
+  FEATURED_TEMPLATE_IDS=tamtaro.complete,Vidhin05.english-template
 - If you're a selfhoster you can additionally add `SEL_SYNC_ACCESS=all` to allow all synced URLs to work (beyond the ones in my templates)
 
 ┈┈┈┈┈┈┈┈․° ☣ °․┈┈┈┈┈┈┈┈
+
 # Quick Setup Overview
 
 1. **Choose an AIOStreams instance**: Nightly is recommended but not required. #links for options.
    - **Selfhosters**: Ensure `SEL_SYNC_ACCESS=all` is set in your environment variables to receive latest SEL-related hotfixes automatically.
-2. **Import Template**: Paste this URL into *AIOStreams → Save & Install :floppy_disk: → Import Template*:
+2. **Import Template**: Paste this URL into _AIOStreams → Save & Install :floppy_disk: → Import Template_:
    `https://git.tamtaro.de/complete.json`
    - **Confirm Import** to save the templates. Most public instances should already have template.
    - Start with **"Tamtaro Complete SEL Setup"** (works for both Debrid/Usenet or P2P).
    - Follow the prompts to personalize your filtering, services, and credentials. Leave all options default to get my recommended setup.
 3. **Advanced Customization**:
-  -  Add Usenet addons if you use them.
-   - Browse complete list of  [Optional SELs](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#-optional-sels), most of which are already incorporated inside template.
-   - Adjust **Ranked Stream Expression** scores via [Vidhin's GitHub](https://github.com/Vidhin05/Releases-Regex) for more nuanced sorting.
+
+- Add Usenet addons if you use them.
+- Browse complete list of [Optional SELs](https://github.com/dvoin3scu/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#-optional-sels), most of which are already incorporated inside template.
+- Adjust **Ranked Stream Expression** scores via [Vidhin's GitHub](https://github.com/Vidhin05/Releases-Regex) for more nuanced sorting.
+
 4. **Catalogs**: Import my JSONs (with/without anime) via trusted instance of AIOMetadata (#links). This is a separate addon from AIOStreams.
    - Refer to GitHub (end of page) for full set steps.
 
 Pro Tip: If you want to keep your current list of addons but want my full sorting and filtering logic, use the Complete SEL Setup but simply check off "No Addons" in Addon Options, during the import step!
 ┈┈┈┈┈┈┈┈․° ☣ °․┈┈┈┈┈┈┈┈
 
-
 ##### What’s New: The Complete SEL Setup Experience
-There are now only two templates: *Tamtaro Complete SEL Setup* and *Tamtaro Partial SEL Setup*. See [here](https://discord.com/channels/1225024298490662974/1410118448306192425/1410123621900484678) for full description of each. When you import these templates now, AIOStreams will present you with an onboarding menu. You can toggle features on or off based on your specific needs:
+
+There are now only two templates: _Tamtaro Complete SEL Setup_ and _Tamtaro Partial SEL Setup_. See [here](https://discord.com/channels/1225024298490662974/1410118448306192425/1410123621900484678) for full description of each. When you import these templates now, AIOStreams will present you with an onboarding menu. You can toggle features on or off based on your specific needs:
 
 - Addons Options
-  - Each mode comes with a preset of recommended addons: 
-  - P2P Setup (No services selected): *Meteor, Comet, StremThru, TorzS, MediaFusion, Torrentio, TorrentsDB, Peerflix, Sootio, Nuvio Streams, Nuvio Anime, WebStreamr*
-  - Debrid Mode (Services Selected): *SeaDex, Library, Meteor, Comet, STorz, Torrentio, MediaFusion, Knaben, AnimeTosho, Sootio*
+  - Each mode comes with a preset of recommended addons:
+  - P2P Setup (No services selected): _Meteor, Comet, StremThru, TorzS, MediaFusion, Torrentio, TorrentsDB, Peerflix, Sootio, Nuvio Streams, Nuvio Anime, WebStreamr_
+  - Debrid Mode (Services Selected): _SeaDex, Library, Meteor, Comet, Torz, Torrentio, MediaFusion, Knaben, AnimeTosho, Sootio_
 - Dynamic Addon Options in the Wizard
   - TorBox Search is automatically added if you select Torbox service, and add the NZB version if Pro tier is selected during onboarding.
   - Selecting "No Anime" in the wizard will remove Anime Addons and related anime config from your final build.
   - HTTP Addons are automatically included in the P2P setup but remain an optional toggle for Debrid users who want backup streams for niche titles.
   - If you select "No Addons" during the import, the wizard will ignore the lists above and keep your current addon page exactly as it is, only updating your filtering and sorting.
   - You can now choose your Global Addon Timeout, which will apply across all imported addons.
-┈┈┈┈┈┈┈┈․° ☣ °․┈┈┈┈┈┈┈┈
+    ┈┈┈┈┈┈┈┈․° ☣ °․┈┈┈┈┈┈┈┈
 
-
-- Preferred Language option is now built into the template. 
-  - These are placed first in the language ranking. Original, Dual Audio, Multi, Dubbed, and Unknown are automatically appended after your selections. Fine-tune the full order in Filters → Language after import. The included formatter will display only your preferred languages. 
+- Preferred Language option is now built into the template.
+  - These are placed first in the language ranking. Original, Dual Audio, Multi, Dubbed, and Unknown are automatically appended after your selections. Fine-tune the full order in Filters → Language after import. The included formatter will display only your preferred languages.
   - Anything inside Preferred is duplicated inside Required. So streams without any of your preferred languages, beside title's Original language, will be removed.
-  
 - Excluded Visual Tags
   - By defaults, AI and 3D visual tags are excluded. If your device does not support DV, select 'DV Only' to exclude all DV streams with no HDR fallbacks. You will remove all HDR+DV streams if you simply exclude 'DV'.
   - Removing various visual tags was a popular request, so you can now decide this during Import, instead of navigating through AIOS -> Filters afterwards.
-  
 - Sorting Options
-  - Streams are sorted under Global dropdown inside Cached: 
-    - Debrid/Usenet : *SeaDex → Resolution → Quality → Library → Stream Expression → Stream Expression Score → Language → Encode → Bitrate → Seeders*.
-    - P2P Setup: *SeaDex → Resolution → Quality → Library → Stream Expression → Stream Expression Score → Seeders → Language → Encode → Bitrate*.
-  - You can fine-tune the Sort Order by applying "Boosts" to specific categories
-    - Library Boost: Prioritizes streams already in your library within each category. This is useful for quickly identifying specific episodes or manually added content.
-    - Language Boost: Gives priority to streams matching your "Preferred Languages". Higher boosts may rank lower-quality streams higher if they contain your preferred language.
-    - SEL Score Boost: Prioritizes results with higher SEL scores, regardless of resolution or quality.
-    - Seeders Boost (P2P Only): Ensures streams with the highest seeder counts appear at the top.
-┈┈┈┈┈┈┈┈․° ☣ °․┈┈┈┈┈┈┈┈
+  - Streams are sorted under Global dropdown inside Cached:
+    - Debrid/Usenet : _SeaDex → Resolution → Quality → Library → Stream Expression → Stream Expression Score → Language → Encode → Bitrate → Seeders_.
+    - P2P Setup: _SeaDex → Resolution → Quality → Library → Stream Expression → Stream Expression Score → Seeders → Language → Encode → Bitrate_.
+  - You can fine-tune the Sort Order by applying "Boosts" to specific categories - Library Boost: Prioritizes streams already in your library within each category. This is useful for quickly identifying specific episodes or manually added content. - Language Boost: Gives priority to streams matching your "Preferred Languages". Higher boosts may rank lower-quality streams higher if they contain your preferred language. - SEL Score Boost: Prioritizes results with higher SEL scores, regardless of resolution or quality. - Seeders Boost (P2P Only): Ensures streams with the highest seeder counts appear at the top.
+    ┈┈┈┈┈┈┈┈․° ☣ °․┈┈┈┈┈┈┈┈
 
 - Recommended Optional SELs
   - You can now select these SELs to be added directly inside your config. No more copy-pasting and editing them off GitHub.
     - ☑ NZB-Only: health-checked Zyclops/UsenetStreamer results only.
     - DV Profile 5: removes DV Only Non-Remux streams.
-    - 4K Remux: removes 4k Remux due to device compatability or file size. 
-    - Bitrate Hardcap (Mobile): removes bitrate over 4K@8Mbps · 1080p@3Mbps · 720p@2Mbps. 
+    - 4K Remux: removes 4k Remux due to device compatability or file size.
+    - Bitrate Hardcap (Mobile): removes bitrate over 4K@8Mbps · 1080p@3Mbps · 720p@2Mbps.
     - Bitrate Softcap (Travel): dynamic, doesn't remove higher-bitrate streams if choices are few
-  
 - Pin & Passthrough Options
   - These options allow specific streams to bypass Standard SEL filter and optionally appear at the top. Rest of the results will still follow default SEL setup.
     - Language Passthrough: Ensures a set number of streams (you choose) in a specific language always show up, even if they would normally be filtered out. Option to pin these, or to only apply for Anime.
     - Visual Tag Passthrough: Allows up to 5 results for specific tags (like DV, HDR, or SDR) to bypass filters and optionally be pinned to the top.
-    - Usenet Passthrough: Allows a specified number of top Usenet results per category to bypass filters, though they typically remain ranked below cached debrid stream. 
+    - Usenet Passthrough: Allows a specified number of top Usenet results per category to bypass filters, though they typically remain ranked below cached debrid stream.
     - Usenet Boost: Adds a Preferred Stream Expression to allow cached usenet be ranked on the same tier as cached Debrid.
     - Top 1 Pin: Can be configured to pin the single best result per Resolution (max 3) or per Quality/Resolution (max 6).
-
-  
 - Formatter Choice
   - Toggle between my recommended clean formatter, a "Full RSE" for debugging, or keep your existing formatter entirely
-<img width="629" height="459" alt="stremio-shell-ng_fB6TuLQwCy" src="https://github.com/user-attachments/assets/673977d0-16c1-4c48-a7e6-58b5bca45fc2" />
+    <img width="629" height="459" alt="stremio-shell-ng_fB6TuLQwCy" src="https://github.com/user-attachments/assets/673977d0-16c1-4c48-a7e6-58b5bca45fc2" />
 
- 
 That's it for this All-in-One Complete template. Most Optional SELs can be added right inside the Template Wizard. Lots of options to play around with, dozens of unique setup possible. The Partial Setup template has just the SEL Only and the Formatter only, so nothing else in your config will get changed.
-
 
 ##### Direct Links to open my template on popular public AIOS instances:
 
-- [**Yeb's Nightly**](https://aiostreams-nightly.fortheweak.cloud/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
-- [**Kuu's Nightly**](https://aiostreams-nightly.206111.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
-- [**Midnight's Nightly**](https://aiostreamsfortheweebs.midnightignite.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
-- [**Viren's Nightly**](https://aiostreams.viren070.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
-- [**ElfHosted Public**](https://aiostreams.elfhosted.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) :warning: 
+- [**Yeb's Nightly**](https://aiostreams-nightly.fortheweak.cloud/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
+- [**Kuu's Nightly**](https://aiostreams-nightly.206111.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
+- [**Midnight's Nightly**](https://aiostreamsfortheweebs.midnightignite.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
+- [**Viren's Nightly**](https://aiostreams.viren070.me/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
+- [**ElfHosted Public**](https://aiostreams.elfhosted.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json) :warning:
   - Note: ElfHosted public instance has P2P/Torrentio disabled. A service selection is required to proceed with Debrid/Usenet Mode.
-- [**ATBP Hosting**](https://aio.atbphosting.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
-- [**OMNI**](https://aiostreams.12312023.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
-- [**StremioFR**](https://aiostreams.stremiofr.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
-</details>	
+- [**ATBP Hosting**](https://aio.atbphosting.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
+- [**OMNI**](https://aiostreams.12312023.xyz/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
+- [**StremioFR**](https://aiostreams.stremiofr.com/stremio/configure?menu=about&template=https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/main/Tamtaro-All-Templates-for-AIOStreams.json)
+</details>
 
 <details>
 	
@@ -208,27 +218,29 @@ February 22, 2026: v1.6.2
 February Feb 19, 2026: v1.6.0
 
 **Selfhosters**
-- The last template incorporated Ranked SEL and synced URLs from Vidhin, but some issues needed addressing. I'm now updating our setup to work with all those cool features. In particular, all my SELs (Excluded, Included, and Preferred) will have synced urls baked into the templates. All instance hosters and selfhosters, please enable my and Vidhin's URLs and auto-sync env with the following:
-     - <details>
-       <summary>.env for selfhosters to enable my templates</summary>
-                         
-			WHITELISTED_REGEX_PATTERNS_URLS=["https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/English/regexes.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/German/regexes.json"]
-			WHITELISTED_SEL_URLS=["https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-extended.json", "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-standard.json", "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ISEs.json", "https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-PSEs.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/English/expressions.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/German/expressions.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/English/legacy-expressions.json"]
-			
-			TEMPLATE_URLS=["https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/refs/heads/main/all-templates.json"]
-			TEMPLATE_REFRESH_INTERVAL=3600 #1 hour. Default: 86400 (1 day)
-			WHITELISTED_SYNC_REFRESH_INTERVAL=3600 #1 hour. Default: 86400 (1 day)
 
+- The last template incorporated Ranked SEL and synced URLs from Vidhin, but some issues needed addressing. I'm now updating our setup to work with all those cool features. In particular, all my SELs (Excluded, Included, and Preferred) will have synced urls baked into the templates. All instance hosters and selfhosters, please enable my and Vidhin's URLs and auto-sync env with the following:
+  - <details>
+    <summary>.env for selfhosters to enable my templates</summary>
+                      
+    WHITELISTED_REGEX_PATTERNS_URLS=["https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/English/regexes.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/German/regexes.json"]
+    WHITELISTED_SEL_URLS=["https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-extended.json", "https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ESEs-standard.json", "https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-ISEs.json", "https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOStreams-SyncedURLs/Tamtaro-synced-PSEs.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/English/expressions.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/German/expressions.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/English/legacy-expressions.json"]
+
+    TEMPLATE_URLS=["https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json", "https://raw.githubusercontent.com/Vidhin05/Releases-Regex/refs/heads/main/all-templates.json"]
+    TEMPLATE_REFRESH_INTERVAL=3600 #1 hour. Default: 86400 (1 day)
+    WHITELISTED_SYNC_REFRESH_INTERVAL=3600 #1 hour. Default: 86400 (1 day)
 
 **Addons**
+
 - Current Addons
-  - Debrid Template: SeaDex (change), STore, TB Search (optional), STorz, Comet, MediaFusion, Knaben, AnimeTosho, Sootio (new), Torrentio.
-  - P2P Template: Comet, STorz, MediaFusion, Torrentio, TorrentsDB, Peerflix, Nuvio Anime, Nuvio Streams, WebStreamr.]
+  - Debrid Template: SeaDex (change), Store, TB Search (optional), Torz, Comet, MediaFusion, Knaben, AnimeTosho, Sootio (new), Torrentio.
+  - P2P Template: Comet, Torz, MediaFusion, Torrentio, TorrentsDB, Peerflix, Nuvio Anime, Nuvio Streams, WebStreamr.]
 - Change
   - Added Sootio for better content coverage on niche searches (has HTTP sources and library search as well)
   - Moved SeaDex to top to prevent deduplication. Again, this addon won't get used when searching non-anime.
 
 **Sorting**
+
 - Current Sort Order
   - Global: Cached.
   - Cached: SeaDex → Resolution → Quality → Library (change) → Stream Expression → Stream Expression Score→ Language → Visual Tag → Audio Tag → Encode → Bitrate → Seeders.
@@ -238,9 +250,10 @@ February Feb 19, 2026: v1.6.0
   - Put back Visual Tag & Audio Tag to sort order. This does not affect those that use RSEs to sort stream, so there was no reason to remove them in the first place. Allows sorting to work on setup with a different scoring or without one completely.
 
 **Filters/SELs**
+
 - Synced URLS!!!!
   - All 4 of them, yes I remember to make one for extended ESEs.
-  - Once inserted into your config, they will auto-sync with any changes I push. Default is 24hr but if your instance hoster use my recommended env above, it'll be every hour. 
+  - Once inserted into your config, they will auto-sync with any changes I push. Default is 24hr but if your instance hoster use my recommended env above, it'll be every hour.
   - For changes to the rest of our setup (Sort Order, Basic Filters, Addons, Formatters, etc), you still need to import via templates (or do it manually).
   - Optional SELs will be coming directly to synced urls (as disabled) in future updates
 - Some ESEs got reworked
@@ -248,24 +261,26 @@ February Feb 19, 2026: v1.6.0
   - Previous Movie 4K now merged with anime to become `Bad 4K`: Meant to predict when 4ks are unwanted (eg. fake Blurays). Fixed issue where intentionally removing 4k Remux broke the old filter.
   - Previous Anime filter became `Extra SeaDex`, removing extra SeaDex results that usually happens when it uses release group fallback (when no exact hash match found)
   - Re-labeled them all to be clearer with what they do.
-- Ranked Stream Expressions/Regex**
-  - Fixed the issue of wrong url from 1.5.0, now using updated urls from [Vidhin's Template for English Regexes](https://github.com/Vidhin05/Releases-Regex), for both RSE and Ranked Regex. 
-  - See his GitHub for more details on customization of RSEs. You can disable various RSEs as you wish. It'll stay disabled even after syncing (as long as he hasn't edited that exact SEL you touched, so do check back once awhile to see what's new in the synced URLs. Same tip for my synced SELs). 
-- Fleshed out Audio Tag Preferrence Order from lossless to lossy, as followed: 
+- Ranked Stream Expressions/Regex\*\*
+  - Fixed the issue of wrong url from 1.5.0, now using updated urls from [Vidhin's Template for English Regexes](https://github.com/Vidhin05/Releases-Regex), for both RSE and Ranked Regex.
+  - See his GitHub for more details on customization of RSEs. You can disable various RSEs as you wish. It'll stay disabled even after syncing (as long as he hasn't edited that exact SEL you touched, so do check back once awhile to see what's new in the synced URLs. Same tip for my synced SELs).
+- Fleshed out Audio Tag Preferrence Order from lossless to lossy, as followed:
   - Atmos, DTS:X, TrueHD, DTS-HD MA, FLAC, DTS-HD,DTS-ES, DTS, DD+, DD, OPUS, AAC
 
 **Formatter**
-- This part took me the longest to update and fix, esp to make them looking perfect on older TVs @devilsingh understands. The rest of you that don't use my formatter, you can laugh, but :middle_finger: 
+
+- This part took me the longest to update and fix, esp to make them looking perfect on older TVs @devilsingh understands. The rest of you that don't use my formatter, you can laugh, but :middle_finger:
   - Complete overhaul to icons used. Kept old ones that were compatible on WebOS, replaced the rest.
-  - Fixed issues of some tv not rendering small caps s & f 
-  - "Fixed" popular request to remove audio tags and visual tags from rseMatched. 
+  - Fixed issues of some tv not rendering small caps s & f
+  - "Fixed" popular request to remove audio tags and visual tags from rseMatched.
   - `Formatter Only (Full rseMatched) Template` is now included in my template, special gift for you Vidhin. It keeps all rseMatched information intended for use in debugging rseMatched scores with TRaSH guides.
   - Fixed alignment issues in title section, where things don't break at different scaling, like single rating star rating not starting in a new line
-- Added ⚿ ᴘʀɪᴠᴀᴛᴇ  indicator
+- Added ⚿ ᴘʀɪᴠᴀᴛᴇ indicator
 - Fixed a bunch of redundant visual tags & audio tags (like double HDR, double DD, IMAX)
 - No more 1/2 as half stars, found one that works on TVs
 
 **Miscellaneous**  
+
 - Title Match threshold from 0.95 → 1
 - In case you didn't know, v1.5.0 Formatter is built into AIOStreams dropdown selection. My Formatter Only Templates may or may not be the same as the built-in depending on when Viren updates it inside AIOStreams. And of course the new "Formatter Only (Full rseMatched) Template" is template-exclusive.
 
@@ -277,40 +292,45 @@ February 8, 2026: What's new in template v1.5.0!
 	
 **Addons**
 - Current Addons (no change from 1.4) 
-- Debrid Template: STore, TB Search (optional), SeaDex, STorz, Comet, MediaFusion, Knaben, AnimeTosho, Torrentio.
-- P2P Template: Comet, STorz, MediaFusion, Torrentio, TorrentsDB, Peerflix, Nuvio Anime, Nuvio Streams, WebStreamr.  
+- Debrid Template: Store, TB Search (optional), SeaDex, Torz, Comet, MediaFusion, Knaben, AnimeTosho, Torrentio.
+- P2P Template: Comet, Torz, MediaFusion, Torrentio, TorrentsDB, Peerflix, Nuvio Anime, Nuvio Streams, WebStreamr.  
 
 **Filters/SELs**
+
 - Switched out "Bad Regex" SEL with  "Low SEL Score" in ESE, filtering low RSE scores when enough high ones exist.
 - Previous SELs that relied on regexMatched(streams, "Bad") no longer worked, so I rewrote them to use scores instead
-- Once known for my SEL's brevity, I managed to achieve that again by cutting 2k chars off my  SELs
+- Once known for my SEL's brevity, I managed to achieve that again by cutting 2k chars off my SELs
 
 **Ranked Stream Expressions**
-- Imported from [Vidhin's Regexes - Advanced v0.2.2](https://github.com/Vidhin05/Releases-Regex), which also comes with corresponding Ranked Stream Expressions (and scores) for release groups and other attributes, used in sorting. See his GitHub for more details on customization. 
+
+- Imported from [Vidhin's Regexes - Advanced v0.2.2](https://github.com/Vidhin05/Releases-Regex), which also comes with corresponding Ranked Stream Expressions (and scores) for release groups and other attributes, used in sorting. See his GitHub for more details on customization.
 - The regex portion is the synced url which auto updates daily. When Vidhin releases new updates beyond the version 0.2.2 included in my setup template, you simply import his new template version after you've imported my template first. This will update any RSEs or scoring changes he has made since.
 
 **Sorting**
+
 - Current Sort Order   
-  - Global: Cached.    
-  - Cached: SeaDex → Library → Resolution → Quality → Stream Expression Matched → **Stream Expression Score** → Language → Encode → Bitrate (new) → Seeders.    
- - Uncached: Same, with Seeders before Language.  
+   - Global: Cached.    
+   - Cached: SeaDex → Library → Resolution → Quality → Stream Expression Matched → **Stream Expression Score** → Language → Encode → Bitrate (new) → Seeders.    
+- Uncached: Same, with Seeders before Language.  
 - Changes:    
   - Removed Visual Tag & Audio Tag from sort order  
   - Switched Bitrate for previous Size
-**Formatter** 
+    **Formatter** 
 - Size, folder size and bitrate now uses ::sbytes
-- Normalized RSE score as stars out of 5 
+- Normalized RSE score as stars out of 5
 - Edited last line to include & format rseMatched and score in small caps
 - Removed some old attributes that overlap with rseMatched
- 
+
 **Miscellaneous**  
+
 - New template option "Complete Setup without Formatter"
 - Extended SEL Only Template now keeps slightly more streams than before (slice 6 instead of 5)
 - as before, Standalone SEL Only template has Excluded, Included and Preferred Stream Expressions.  
 - Ranked Stream Expressions are handled by Vidhin's Template
-- More Optional SELs on [Github](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting#-optional-sels) to further customize your filtering.
+- More Optional SELs on [Github](https://github.com/dvoin3scu/SEL-Filtering-and-Sorting#-optional-sels) to further customize your filtering.
 
 **AIOMetadata**
+
 - No change to AIOMetadata since v1.4.0
 
 </details>
@@ -320,77 +340,86 @@ February 8, 2026: What's new in template v1.5.0!
 	
 February 4, 2026: What's new in template v1.4.3!
 - G's Low Bitrate ESE now fixed to only trigger if triggering it results in greater than 10 total remaining cached.
-- STorz now switched back to using Torznab endpoint.`"torznabUrl": "https://stremthru.13377001.xyz/v0/torznab",`
+- Torz now switched back to using Torznab endpoint.`"torznabUrl": "https://stremthru.13377001.xyz/v0/torznab",`
   - this solves the false parsing of iTunes as Italian language resulting in false sorting
 - ongoingSeasonPacks ESE now fixed to work in more niche cases
 - removed pre-DigitalRelease ESE until further notice. Previously it was using daysSinceRelease which is using theatrical release datae not digital release date.
 - Fixed some syntax issues causing digitalRelease ISE to not work properly (it supposes to passthrough low res quality releases like cams for movies not yet released in digital, and removing fake web-dls and remuxes)
 
 February 2, 2026: What's new in template v1.4.0!
+
 - Addons adjusted slightly: Default urls, SeaDex addon prioritized, optional Torbox.
-- Filtering further improved: New recent features such as passthrough, bitrate and math in SEL got incorporated into old and new SELs alike. 
+- Filtering further improved: New recent features such as passthrough, bitrate and math in SEL got incorporated into old and new SELs alike.
 - Formatter upgraded: Bitrate display, shorter titles, everything tweaked for a cleaner than ever look.
 - Sort Order updated: Stream Expression Score added replacing Regex Patterns from before.
-- Full list of Optional SELs (more to come) are found [here](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting?tab=readme-ov-file#-optional-sels).
+- Full list of Optional SELs (more to come) are found [here](https://github.com/dvoin3scu/SEL-Filtering-and-Sorting?tab=readme-ov-file#-optional-sels).
 
-**Addons** 
+**Addons**
+
 - Current Addons
-  - Debrid Template: STore, TB Search (new, optional), SeaDex (new), STorz, Comet, MediaFusion, Knaben, AnimeTosho, Torrentio.
-  - P2P Template: Comet, STorz, MediaFusion, Torrentio, TorrentsDB, Peerflix, Nuvio Anime, Nuvio Streams, WebStreamr.  
+  - Debrid Template: Store, TB Search (new, optional), SeaDex (new), Torz, Comet, MediaFusion, Knaben, AnimeTosho, Torrentio.
+  - P2P Template: Comet, Torz, MediaFusion, Torrentio, TorrentsDB, Peerflix, Nuvio Anime, Nuvio Streams, WebStreamr.
 - Changes:
   - Timeout reduced to 7000 ms for all addons (from 7500 ms).
-  - Default empty base urls. Will use whichever default your AIOS hosters decide. Select to change base url as needed.  
-  - STorz switched back to Munif's addon instead of Torznab addon so base url field can be left empty.
-  - SeaDex newly added for Debrid template and prioritized highly in the order.  
+  - Default empty base urls. Will use whichever default your AIOS hosters decide. Select to change base url as needed.
+  - Torz switched back to Munif's addon instead of Torznab addon so base url field can be left empty.
+  - SeaDex newly added for Debrid template and prioritized highly in the order.
   - New optional addon Torbox Search (torrent) comes disabled.
-  
-**Filters**  
-- New bitrate filter (adapted by G from [TRaSH guide](https://trash-guides.info/Radarr/Radarr-Quality-Settings-File-Size/#standard)) removes low bitrate streams based on queryType detection and quality/resolution thresholds (e.g., 4K WEB-DL >4.6Mbps).  
-- New exclusions for keywords "r00", "iso" in excludedKeywords.  
-- Digital Release Filter enabled for all query types (movies and series and anime).  
-- Preferred Languages updated: "Original" added after English. Japan and Korean now removed as "Original" takes their place.  
 
-**Formatter**  
-- Title truncated to 15 chars (from 20). Date is now off for tv series, allows full visibility of ep/season detail in first line. 
+**Filters**
+
+- New bitrate filter (adapted by G from [TRaSH guide](https://trash-guides.info/Radarr/Radarr-Quality-Settings-File-Size/#standard)) removes low bitrate streams based on queryType detection and quality/resolution thresholds (e.g., 4K WEB-DL >4.6Mbps).
+- New exclusions for keywords "r00", "iso" in excludedKeywords.
+- Digital Release Filter enabled for all query types (movies and series and anime).
+- Preferred Languages updated: "Original" added after English. Japan and Korean now removed as "Original" takes their place.
+
+**Formatter**
+
+- Title truncated to 15 chars (from 20). Date is now off for tv series, allows full visibility of ep/season detail in first line.
 - Season/Episode formatting improved: replaces E/S with lowercase, numbers 0-9.
 - Added bitrate display (Mbps/Kbps) when available.
-- Indexer names truncated to 13 chars for usenet. 
-- New feat ::smallcaps now simplified formatter cutting character count by over 1/3: numbers 0-9 instead of detailed labels (e.g., Anime BD T1 → 1).  
+- Indexer names truncated to 13 chars for usenet.
+- New feat ::smallcaps now simplified formatter cutting character count by over 1/3: numbers 0-9 instead of detailed labels (e.g., Anime BD T1 → 1).
 - Although uSmallLanguageCodes is used, `Original` language will turn into corresponding language marked visible under this formatter (eg., ꜰʀ still appear on a French movie even tho French wasn't in language filter).
 
-**SEL**  
-- Excluded Stream Expressions 
-  - New filters: Low bitrate adapted from G, ongoingSeasonPack (hides ongoing season packs), pre-Digital (hides CAM/TS/TC/SCR for new movies).  
-  - Improved Seeders filter using q1/q2/percentile for P2P/uncached debrid (more statistical).  
-  - Anime filter refined to remove unnecessary 4k and extra seadex results.  
-  - New "Movie 4k" filter: removes all 4k except 4K WEB-DL if certain conditions are met, like presence of 1080p REMUX with no corresponding 4k REMUX.  
-  - Bad NZBs filter updated.  
+**SEL**
+
+- Excluded Stream Expressions
+  - New filters: Low bitrate adapted from G, ongoingSeasonPack (hides ongoing season packs), pre-Digital (hides CAM/TS/TC/SCR for new movies).
+  - Improved Seeders filter using q1/q2/percentile for P2P/uncached debrid (more statistical).
+  - Anime filter refined to remove unnecessary 4k and extra seadex results.
+  - New "Movie 4k" filter: removes all 4k except 4K WEB-DL if certain conditions are met, like presence of 1080p REMUX with no corresponding 4k REMUX.
+  - Bad NZBs filter updated.
   - Cached/uncached slices remain at 3 per category for Standard 3 per category for Extended.
-    
-**Preferred/Included Stream Expressions**  
+
+**Preferred/Included Stream Expressions**
+
 - Advanced tiered stream types (Tier 1: cached lib/SeaDex/debrid/torbox usenet; Tier 2: cached nzbdav/http/p2p; Tier 3: uncached usenet; Tier 4: uncached debrid).
   - This is used to sort results, prioritizing various type of cached streams according to its reliability, using Stream Expression Matched in Sort Order.
-  - Now incorporated the fix mentioned   
-- New: SeaDex passthrough, Library exemption, digitalRelease, 0Cached title passthrough.  
+  - Now incorporated the fix mentioned
+- New: SeaDex passthrough, Library exemption, digitalRelease, 0Cached title passthrough.
 
 **Ranked Stream Expressions**
- - Imported from Vidhin's Public regex template, which also comes with corresponding Preferred Regex Patterns for release groups as before. See [his github ](https://github.com/Vidhin05/Releases-Regex)for more detail.
 
-**Sorting**  
- - Current Sort Order  
-   - Global: Cached.  
-   - Cached: SeaDex → Library → Resolution → Quality → Stream Expression Matched → **Stream Expression Score (new)** → Language → Visual Tags → Encode → Audio Tag → Size → Seeders.  
-   - Uncached: Similar, with Seeders before Language.  
- - Changes:  
-   - Added "streamExpressionScore" after Stream Expression Matched (ranks regex tiers numerically, e.g., Remux T1=1950, Bad=-10000).  
-   - Regex patterns updated with scores for anime/non-anime.  
+- Imported from Vidhin's Public regex template, which also comes with corresponding Preferred Regex Patterns for release groups as before. See [his github ](https://github.com/Vidhin05/Releases-Regex)for more detail.
 
-**Miscellaneous**  
+**Sorting**
+
+- Current Sort Order
+  - Global: Cached.
+  - Cached: SeaDex → Library → Resolution → Quality → Stream Expression Matched → **Stream Expression Score (new)** → Language → Visual Tags → Encode → Audio Tag → Size → Seeders.
+  - Uncached: Similar, with Seeders before Language.
+- Changes:
+  - Added "streamExpressionScore" after Stream Expression Matched (ranks regex tiers numerically, e.g., Remux T1=1950, Bad=-10000).
+  - Regex patterns updated with scores for anime/non-anime.
+
+**Miscellaneous**
+
 - digitalReleaseFilter enabled for series.
 - TVDB API now back to mandatory during template onboarding, as various AIOS requires it for better accuracy.
 - Descriptions updated across templates to reflect v1.4.0, new features.
 - Standalone SEL Only template will now have Excluded, Included and Preferred Stream Expressions.
-- Sharing more Optional SELs on [Github](https://github.com/Tam-Taro/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#-optional-sels) to further customize your filtering.
+- Sharing more Optional SELs on [Github](https://github.com/dvoin3scu/SEL-Filtering-and-Sorting/tree/main?tab=readme-ov-file#-optional-sels) to further customize your filtering.
 
 See v1.3.1 for unchanged items.
 
@@ -400,130 +429,137 @@ See v1.3.1 for unchanged items.
   <summary>v1.3.0</summary>
   <p></p>
 
-December, 24,  2025
+December, 24, 2025
 What's new in template v1.3.0!
+
 - Addons tuned: Default fetching, 7500 ms timeout.,
 - Filters refined: AI tag excluded, SeaDex integrated.,
 - Formatter upgraded: Best/Alt release tags, NZB health checks, cleaner layout.,
 - SEL improved: New Optional SELs for NZB/DV/Travel filters, easier customization.,
-- Sorting updated: SeaDex now top priority.	
+- Sorting updated: SeaDex now top priority.
 
 December 24, 2025: v1.3.0
 
-__Addons__
+**Addons**
+
 - Current Addons
   - Debrid Template:
-   - `STore, Torrentio, Comet, MediaFusion, STorz, Knaben, AnimeTosho`
+  - `Store, Torrentio, Comet, MediaFusion, Torz, Knaben, AnimeTosho`
   - P2P Template:
-   - `Torrentio, Comet, MediaFusion, STorz, TorrentsDB, Peerflix, Nuvio Anime, Nuvio Streams, WebStreamr`
+  - `Torrentio, Comet, MediaFusion, Torz, TorrentsDB, Peerflix, Nuvio Anime, Nuvio Streams, WebStreamr`
 - Changes:
   - Addon Fetching Strategy now set to Default
   - Timeout for all addons set at 7500 ms
   - Removed meta resource from Torrentio & MediaFusion
-  - STorz now uses Forced Query Search Mode
+  - Torz now uses Forced Query Search Mode
 
-__Filters__
+**Filters**
+
 - Removed some lower end items in resolution and visual tag
 - Added `AI` into Excluded Visual Tag field (subsequently removed AI filter portion from Anime Filter SEL as no longer needed)
 - Stream type now has debrid → usenet priority (only used for deduplication purpose in this setup)
 - Miscellaneous now has SeaDex integration enabled
 
-__Formatter__
+**Formatter**
+
 - Added support for SeaDex, will say "ʙᴇsᴛ ʀᴇʟᴇᴀsᴇ" or "ᴀʟᴛ ʙᴇsᴛ ʀᴇʟᴇᴀsᴇ" on streams considered as Best/Alt release per SeaDex website
 - Added support for UsenetStreamer's health checked results; will say ☑ ɴᴢʙ, ☑ ᴇʟғ ɴᴢʙ, ᴜɴᴠᴇʀɪғɪᴇᴅ ɴᴢʙ, or ☒ ɴᴢʙ
 - Cleaned up formatting for KissKh streams from StreamAsia (currently offline)
 - Last line of formatter will now be in small caps font
 - Check #formatter [thread](https://discord.com/channels/1225024298490662974/1408573854393303242/1408573854393303242) for full details
 
-__Miscellaneous__
+**Miscellaneous**
+
 - Disabled Pre-cache Next Episode completely. This feature caused too many #support instances of "why is this file in my dashboard"
 - Switched Language out for releaseGroup in Auto Play Attributes, so now that field has `resolution, quality, releaseGroup`
 - Default logo set to custom SEL logo for AIOS
 
-__SEL__
-- Excluded Stream Expressions 
+**SEL**
+
+- Excluded Stream Expressions
   - Added KissKH Filter, Bad NZB Filter, and a few placeholders (blank lines) before my SEL lines for easier customization
     - Perfect for modifying your SEL setup results if you wish to do more filtering before my SEL filtering engine kicks in. See my Optional SELs for some ideas.
   - Reduced "Bad" Regex Filter condition from 15 to 10 non-"Bad" so they're more likely to be removed
   - Inserted seadex(streams) as exemption into various SEL lines so they don't get removed
   - For the full SEL (Standard and Extended), open up the template jsons to see them.
-  - *New optional SELs*: A couple optional SELs to put into your placeholders as you see fit
-    - __☑ ɴᴢʙ-Only Filter__: A UsenetStreamer filter for those that only want to see health checked results from UsenetStreamer. The SEL line assumes your UsenetStreamer addon is named US, USN, UsenetStreamer, or Usenet Streamer, so avoid naming any other addon with those names.
+  - _New optional SELs_: A couple optional SELs to put into your placeholders as you see fit
+    - **☑ ɴᴢʙ-Only Filter**: A UsenetStreamer filter for those that only want to see health checked results from UsenetStreamer. The SEL line assumes your UsenetStreamer addon is named US, USN, UsenetStreamer, or Usenet Streamer, so avoid naming any other addon with those names.
     - ```text
       /*☑ ɴᴢʙ-Only Filter*/ negate(addon(message(streams,'includes','✅','🧝'),'US','UNS','Usenet Streamer','UsenetStreamer'),addon(streams,'US','UNS','Usenet Streamer','UsenetStreamer'))
-	 - __DV-Only Non-Remux Filter__: remove some DV Only streams that give playback issues (purple screen) on some devices. I use this one as my pc doesn't render DV Profile 5 files very well (particularly from Apple TV Web-DLs)
-    - ```text
-      /*DV Only Non-Remux Filter*/ negate(quality(streams,'BluRay REMUX'), visualTag(streams,'DV Only'))
-   - __Size Filter for Travel__: A size filter for a bandwidth conscious setup (aka for traveling). It's a smart size filter that gets applied only if there are >5 results found within each size range for each resolution and query type. So if there are <5 4k movie streams found within 5GB to 15GB, no size filter is applied for 4k streams. The size range was chosen somewhat arbitrarily, with a mindset of not chasing for best quality but for best bandwidth/quality in practice. It's a way to ensure small fake 4k streams don't get pushed to the top, but also a way to remove very large streams (like remuxes) that you're not gonna need when traveling. Please don't complain about the range if you're using this, just tweak the size range to your preference.
-     - <details>
-       <summary>Size Filter for Travel</summary>
-                              
-            /* Size Filter for Travel */
-            merge(
-            /* 2160p / 1440p */
-            count(resolution(size(cached(streams),
-            queryType=='anime.series'?'1.5GB':queryType=='series'?'2GB':queryType=='anime.movie'?'4GB':'5GB',
-            queryType=='anime.series'?'5GB':queryType=='series'?'8GB':queryType=='anime.movie'?'12GB':'15GB'),
-            '2160p','1440p'))>5?
-            negate(merge(library(streams),seadex(streams),
-            resolution(size(streams,
-            queryType=='anime.series'?'1.5GB':queryType=='series'?'2GB':queryType=='anime.movie'?'4GB':'5GB',
-            queryType=='anime.series'?'5GB':queryType=='series'?'8GB':queryType=='anime.movie'?'12GB':'15GB'),
-            '2160p','1440p')),
-            resolution(streams,'2160p','1440p')):[],
-            
-            /* 1080p */
-            count(resolution(size(cached(streams),
-            queryType=='anime.series'?'500MB':queryType=='series'?'800MB':queryType=='anime.movie'?'1.5GB':'2GB',
-            queryType=='anime.series'?'2GB':queryType=='series'?'3.5GB':queryType=='anime.movie'?'4GB':'5GB'),
-            '1080p'))>5?
-            negate(merge(library(streams),seadex(streams),
-            resolution(size(streams,
-            queryType=='anime.series'?'500MB':queryType=='series'?'800MB':queryType=='anime.movie'?'1.5GB':'2GB',
-            queryType=='anime.series'?'2GB':queryType=='series'?'3.5GB':queryType=='anime.movie'?'4GB':'5GB'),
-            '1080p')),
-            resolution(streams,'1080p')):[],
-            
-            /* 720p */
-            count(resolution(size(cached(streams),
-            queryType=='anime.series'?'250MB':queryType=='series'?'400MB':queryType=='anime.movie'?'700MB':'700MB',
-            queryType=='anime.series'?'1GB':queryType=='series'?'1.8GB':queryType=='anime.movie'?'2GB':'2.5GB'),
-            '720p'))>5?
-            negate(merge(library(streams),seadex(streams),
-            resolution(size(streams,
-            queryType=='anime.series'?'250MB':queryType=='series'?'400MB':queryType=='anime.movie'?'700MB':'700MB',
-            queryType=='anime.series'?'1GB':queryType=='series'?'1.8GB':queryType=='anime.movie'?'2GB':'2.5GB'),
-            '720p')),
-            resolution(streams,'720p')):[],
-            
-            /* ≤576p / Unknown */
-            count(resolution(size(cached(streams),
-            queryType=='anime.series'?'150MB':queryType=='series'?'200MB':queryType=='anime.movie'?'300MB':'300MB',
-            queryType=='anime.series'?'400MB':queryType=='series'?'600MB':queryType=='anime.movie'?'800MB':'1GB'),
-            '576p','480p','360p','240p','144p','Unknown'))>5?
-            negate(merge(library(streams),seadex(streams),
-            resolution(size(streams,
-            queryType=='anime.series'?'150MB':queryType=='series'?'200MB':queryType=='anime.movie'?'300MB':'300MB',
-            queryType=='anime.series'?'400MB':queryType=='series'?'600MB':queryType=='anime.movie'?'800MB':'1GB'),
-            '576p','480p','360p','240p','144p','Unknown')),
-            resolution(streams,'576p','480p','360p','240p','144p','Unknown')):[]
-            )
-
-  
+      ```
+  - **DV-Only Non-Remux Filter**: remove some DV Only streams that give playback issues (purple screen) on some devices. I use this one as my pc doesn't render DV Profile 5 files very well (particularly from Apple TV Web-DLs)
+  - ```text
+    /*DV Only Non-Remux Filter*/ negate(quality(streams,'BluRay REMUX'), visualTag(streams,'DV Only'))
+    ```
+  - **Size Filter for Travel**: A size filter for a bandwidth conscious setup (aka for traveling). It's a smart size filter that gets applied only if there are >5 results found within each size range for each resolution and query type. So if there are <5 4k movie streams found within 5GB to 15GB, no size filter is applied for 4k streams. The size range was chosen somewhat arbitrarily, with a mindset of not chasing for best quality but for best bandwidth/quality in practice. It's a way to ensure small fake 4k streams don't get pushed to the top, but also a way to remove very large streams (like remuxes) that you're not gonna need when traveling. Please don't complain about the range if you're using this, just tweak the size range to your preference.
+    - <details>
+      <summary>Size Filter for Travel</summary>
+                             
+           /* Size Filter for Travel */
+           merge(
+           /* 2160p / 1440p */
+           count(resolution(size(cached(streams),
+           queryType=='anime.series'?'1.5GB':queryType=='series'?'2GB':queryType=='anime.movie'?'4GB':'5GB',
+           queryType=='anime.series'?'5GB':queryType=='series'?'8GB':queryType=='anime.movie'?'12GB':'15GB'),
+           '2160p','1440p'))>5?
+           negate(merge(library(streams),seadex(streams),
+           resolution(size(streams,
+           queryType=='anime.series'?'1.5GB':queryType=='series'?'2GB':queryType=='anime.movie'?'4GB':'5GB',
+           queryType=='anime.series'?'5GB':queryType=='series'?'8GB':queryType=='anime.movie'?'12GB':'15GB'),
+           '2160p','1440p')),
+           resolution(streams,'2160p','1440p')):[],
+           
+           /* 1080p */
+           count(resolution(size(cached(streams),
+           queryType=='anime.series'?'500MB':queryType=='series'?'800MB':queryType=='anime.movie'?'1.5GB':'2GB',
+           queryType=='anime.series'?'2GB':queryType=='series'?'3.5GB':queryType=='anime.movie'?'4GB':'5GB'),
+           '1080p'))>5?
+           negate(merge(library(streams),seadex(streams),
+           resolution(size(streams,
+           queryType=='anime.series'?'500MB':queryType=='series'?'800MB':queryType=='anime.movie'?'1.5GB':'2GB',
+           queryType=='anime.series'?'2GB':queryType=='series'?'3.5GB':queryType=='anime.movie'?'4GB':'5GB'),
+           '1080p')),
+           resolution(streams,'1080p')):[],
+           
+           /* 720p */
+           count(resolution(size(cached(streams),
+           queryType=='anime.series'?'250MB':queryType=='series'?'400MB':queryType=='anime.movie'?'700MB':'700MB',
+           queryType=='anime.series'?'1GB':queryType=='series'?'1.8GB':queryType=='anime.movie'?'2GB':'2.5GB'),
+           '720p'))>5?
+           negate(merge(library(streams),seadex(streams),
+           resolution(size(streams,
+           queryType=='anime.series'?'250MB':queryType=='series'?'400MB':queryType=='anime.movie'?'700MB':'700MB',
+           queryType=='anime.series'?'1GB':queryType=='series'?'1.8GB':queryType=='anime.movie'?'2GB':'2.5GB'),
+           '720p')),
+           resolution(streams,'720p')):[],
+           
+           /* ≤576p / Unknown */
+           count(resolution(size(cached(streams),
+           queryType=='anime.series'?'150MB':queryType=='series'?'200MB':queryType=='anime.movie'?'300MB':'300MB',
+           queryType=='anime.series'?'400MB':queryType=='series'?'600MB':queryType=='anime.movie'?'800MB':'1GB'),
+           '576p','480p','360p','240p','144p','Unknown'))>5?
+           negate(merge(library(streams),seadex(streams),
+           resolution(size(streams,
+           queryType=='anime.series'?'150MB':queryType=='series'?'200MB':queryType=='anime.movie'?'300MB':'300MB',
+           queryType=='anime.series'?'400MB':queryType=='series'?'600MB':queryType=='anime.movie'?'800MB':'1GB'),
+           '576p','480p','360p','240p','144p','Unknown')),
+           resolution(streams,'576p','480p','360p','240p','144p','Unknown')):[]
+           )
 - Preferred Stream Expression
   - `cached(service(streams, 'torbox'), type(streams, 'debrid'), message(type(streams,'usenet', 'stremio-usenet'),'includes','✅', '🧝'))`
   - `merge(cached(service(streams, 'nzbdav', 'altmount', 'easynews')), type(streams, 'http', 'p2p', 'stremio-usenet'))`
   - `uncached(type(streams, 'usenet'))`
   - `uncached(type(streams, 'debrid'))`
-  - Changes: 
-   - Usenet from easynews dropped to tier 2, Usenet with health checked status moved to tier 1.
-   - Added support for stremio-usenet  
+  - Changes:
+  - Usenet from easynews dropped to tier 2, Usenet with health checked status moved to tier 1.
+  - Added support for stremio-usenet
 
-__Sorting__
+**Sorting**
+
 - Current Sort Order
-  - __Global__: `Cached`
-  - __Cached Sort Order__: `SeaDex → Library → Resolution → Quality → Stream Expression Matched → Regex Patterns → Language → (Seeders for P2P setup) → Visual Tags → Encode → Audio Tag → Size → Seeders`
-  - __Uncached Sort Order__: `SeaDex → Library → Resolution → Quality → Stream Expression Matched → Regex Patterns → Seeders → Language → Visual Tags → Encode → Audio Tag → Size`
+  - **Global**: `Cached`
+  - **Cached Sort Order**: `SeaDex → Library → Resolution → Quality → Stream Expression Matched → Regex Patterns → Language → (Seeders for P2P setup) → Visual Tags → Encode → Audio Tag → Size → Seeders`
+  - **Uncached Sort Order**: `SeaDex → Library → Resolution → Quality → Stream Expression Matched → Regex Patterns → Seeders → Language → Visual Tags → Encode → Audio Tag → Size`
 - Changes: SeaDex now in #1 spot in both Cached & Uncached Sort Order
 
 See Release Notes v1.2.0 for everything else that wasn't changed.
@@ -652,39 +688,43 @@ Nov 18, 2025: What's new in template v1.2.0
 This is my recommended setup that should work for most of you. If you just want a finished template, then import & use one of the templates described above. Otherwise read on to customize your current AIOStreams instance.
 
 ### **Sorting**
-- __Global Sort Order Type:__  `Cached`
+
+- **Global Sort Order Type:** `Cached`
   - We put `Cached` here since we want our results to show cached before uncached
   - If `Cached` is first item, the sort algorithm automatically goes to Cached & Uncached Sort Order, nothing else after `Cached` matters in Global Sort Order
 - Cached Sort Order Type: `Resolution → Library → Quality → Regex Patterns → Stream Type → (if p2p only, Seeders here) → Visual Tag → Audio Tag → Encode → Language → Size → Seeders`
   - There is a lot of flexibility here, re-arrange to your preference as to what your top results should prioritize
   - Note that p2p is considered cached and therefore p2p sorting uses this sort order, so if you're using a p2p setup, move `Seeders` up
 - Uncached Sort Order Type: `Resolution → Library → Stream Type → Seeders → Regex Patterns → Quality → Language → Size`
-  - Generally the same as `Cached Sort Order` except Seeders is higher 
+  - Generally the same as `Cached Sort Order` except Seeders is higher
   - There should be very little to no uncached streams in your results (unless you're using usenet which are mostly uncached), therefore you don't need an exclusive list in this uncached sort order
 
 > [!NOTE]
 > If your first filter in `Global Sort Order` is `Cached` and you left `Cached/Uncached Sort Order` blank, your sort/filter may not work properly.
 
 ### 🎚️ Filtering for Template v1.1 (Outdated)
-- Define `Preferrence Order` in each of `Resolution, Quality, Encode, Stream Type, Visual Tag, Audio Tag` and `Language`. 
+
+- Define `Preferrence Order` in each of `Resolution, Quality, Encode, Stream Type, Visual Tag, Audio Tag` and `Language`.
   - This is important for our Sort Order to work.
-> [!NOTE]
-> You will have to edit this section to your personal preference.
+    > [!NOTE]
+    > You will have to edit this section to your personal preference.
   - Under `Language` -> `Required Language`, select all your required languages there. This is ensure streams of the language you watch will be included in the results.
-  - Set `Preferred Languages` to be the same as your `Required Languages`, reorder/rank them to your preferrence. 
+  - Set `Preferred Languages` to be the same as your `Required Languages`, reorder/rank them to your preferrence.
   - By default my setup has the following languages: `English, Japanese, Korean, Dubbed, Dual Audio, Multi, Unknown`. Regardless of your choice, do not remove `Dubbed, Dual Audio, Multi, Unknown` from either lists, as some streams of your language may fall under these language tags.
 
-- Default is recommended in the rest of the filters. If not sure, check my AIOStreams template json for how I configured them 
+- Default is recommended in the rest of the filters. If not sure, check my AIOStreams template json for how I configured them
   - `Quality`: Remove default items in `Excluded` since my SEL will remove CAM/TS/etc when necessary
-  - `Visual Tag`:  If your device doesn't support DV add `DV Only` into `Excluded`. Same for 3D. 
-  -   `Encode`: `Exclude H-OU, H-SBS` for non 3DTV
- - Optional: Import [Vidhin's json for merged anime regexes](https://github.com/Vidhin05/Releases-Regex/blob/main/README.md) into `Regex → Preferred Regex Patterns → Import from url icon` 
- ```text
+  - `Visual Tag`: If your device doesn't support DV add `DV Only` into `Excluded`. Same for 3D.
+  - `Encode`: `Exclude H-OU, H-SBS` for non 3DTV
+- Optional: Import [Vidhin's json for merged anime regexes](https://github.com/Vidhin05/Releases-Regex/blob/main/README.md) into `Regex → Preferred Regex Patterns → Import from url icon`
+
+```text
 https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/merged-anime-regexes.json
 ```
-   - This regex labels all streams with tier rankings based on reputation/quality of release groups per [TRaSH Guides](https://trash-guides.info/). You will need to reimport the regex occassionally whenever Vidhin pushes an update to the regex because many AIOStreams instances will only allow the use of his latest update regex. 
- - Optional: Under `Matching`, enable `Season/Episode Matching` and `Title Matching`  with `Match Year (1 Year Tolerance)` and `Exact Matching Mode` selected. I suggest boosting the `Similarity Threshold` from `0.85 to 1`. Adjust these settings as needed.
- - Under `Deduplicator`, select all 3 `Detection Methods`. Set to `Aggressive` for `Multi-Group Behaviour`. Leave everything else as default (Single Result). 
+
+- This regex labels all streams with tier rankings based on reputation/quality of release groups per [TRaSH Guides](https://trash-guides.info/). You will need to reimport the regex occassionally whenever Vidhin pushes an update to the regex because many AIOStreams instances will only allow the use of his latest update regex.
+- Optional: Under `Matching`, enable `Season/Episode Matching` and `Title Matching` with `Match Year (1 Year Tolerance)` and `Exact Matching Mode` selected. I suggest boosting the `Similarity Threshold` from `0.85 to 1`. Adjust these settings as needed.
+- Under `Deduplicator`, select all 3 `Detection Methods`. Set to `Aggressive` for `Multi-Group Behaviour`. Leave everything else as default (Single Result).
 
 > [!IMPORTANT]
 > Leave all remainder filters setting, `Excluded` `Included` and `Required` boxes empty. As tempting as it sounds to select `Exclude Uncached` or set your `Result Limits`, my SEL will do that for you. This is the first troubleshooting step if your sort/filter looks off!
@@ -694,32 +734,36 @@ https://raw.githubusercontent.com/Vidhin05/Releases-Regex/main/merged-anime-rege
 - All filtering (besides title match and dedupe) can be done with stream expressions. My setup leaves the language filtering to AIOStreams basic language filter (altho can be done using SEL - just think the basic filter is good enough).
 - There are two schools of thought with regards to SEL Filtering:
   - using it to filter during fetching stage via `Dynamic Group Exit Condition` or,
-  - using it after all initial filtering has been done by AIOStreams via  `Excluded Stream Expressions` (ESE) 
+  - using it after all initial filtering has been done by AIOStreams via `Excluded Stream Expressions` (ESE)
 - My setup has been fine-tuned using the second method for over 3 months now with feedback from users. I may incorporate the first method into my setup in the future, however for now heavy work of filtering is done using my three lines of ESE. Copy-paste the codes below into `AIOStreams -> Excluded Stream Expressions` or import them using the SEL-only template json at the top of this page.
   <p>
     <details>
         <summary>First line into ESE: Uncached Filter</summary>
-  
-    ```text
- 
-     ```   
+
+  ```text
+
+  ```
+
     </details>
   </p>
   <p>
     <details>
         <summary>Second line into ESE: Main Quality/Resolution Filter</summary>
-  
-    ```text
-    ```
+
+  ```text
+
+  ```
+
     </details>
   </p>
   <p>
     <details>
         <summary>Third line into ESE: Low Quality/Resolution Filter</summary>
-  
-    ```text
 
-    ```
+  ```text
+
+  ```
+
     </details>
   </p>
 
@@ -728,128 +772,140 @@ The first block of SEL for your `Excluded Stream Expressions` (ESE) is the Uncac
 The second block of ESE is the Main Quality/Resolution Filter. It uses `slice(...,3)` to further trim streams, keeping top ~3 results of most `Quality` and `Resolution` combination. Because AIOStreams sorts streams before SEL filtering, you can determine how your streams is sorted first so that the `slice` of the top results of any `quality` /`resolution` will always select your preferred "highest-quality streams". For me, that would be Vidhin's regex-matched streams, so I put `Regex Pattern` right underneath `Quality` in Sort Order. If you value size or language for every resolution + quality pair then put `Size` or `Language` right underneath `Quality`, the `slice` will then keep your top 3 streams for that particular `quality`/`resolution` according to your size or language preference, respectively.
 
 Third block of ESE is the Low Quality/Resolution Filter. It checks how many streams made through the Main Filter above, and removes low quality and low resolution streams when there are already enough present. It also removes regex-matched streams from "Bad" quality release groups when there are enough non-"Bad" streams present (for those that use Vidhin's regex).
-</details>
 
+</details>
 
 ## ⚙️ Templates Included for AIOStreams
 
-These are setup templates to use with AIOStreams. If you're not sure which AIOStreams instance to start with, check out the list of trusted public instances [here](https://status.dinsden.top/status/stremio-addons). I recommend *nightly* AIOStreams from Midnight, Yeb, Viren, or Kuu. My setup is fine-tuned and tested on latest nightly, so you don't have to worry about features not yet released. Make sure the instance you chose have a working Torrentio add-on. If not, switch to a different instance.
+These are setup templates to use with AIOStreams. If you're not sure which AIOStreams instance to start with, check out the list of trusted public instances [here](https://status.dinsden.top/status/stremio-addons). I recommend _nightly_ AIOStreams from Midnight, Yeb, Viren, or Kuu. My setup is fine-tuned and tested on latest nightly, so you don't have to worry about features not yet released. Make sure the instance you chose have a working Torrentio add-on. If not, switch to a different instance.
 
-| Template | Description |
-|-----------|--------------|
-| **Tamtaro Complete SEL Setup** | Complete configuration with filters, sort orders, streaming addons, and formatter. Template Wizard will guide you through various options, such as without addons or without formatter setup to keep your existing addons or formatter |
-| **Formatter & SEL Only Template** | Imports only the core filtering Engine (Standard or Extended SEL, which consists of Excluded, Included & Preferred Stream Expressions synced urls) or formatter used in the Complete SEL Setup | 
+| Template                          | Description                                                                                                                                                                                                                            |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tamtaro Complete SEL Setup**    | Complete configuration with filters, sort orders, streaming addons, and formatter. Template Wizard will guide you through various options, such as without addons or without formatter setup to keep your existing addons or formatter |
+| **Formatter & SEL Only Template** | Imports only the core filtering Engine (Standard or Extended SEL, which consists of Excluded, Included & Preferred Stream Expressions synced urls) or formatter used in the Complete SEL Setup                                         |
 
 ## 📥 How to Import
 
-1. **AIOStreams → Save & Install 💾 → Import** 
+1. **AIOStreams → Save & Install 💾 → Import**
 2. Click **Import Template**
 3. Copy & Paste the URL to "Tamtaro-All-Templates-for-AIOStreams"
+
 ```text
-https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json
+https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/Tamtaro-All-Templates-for-AIOStreams.json
 ```
-4. "Confirm Import" to import all templates available from me.  This will save them into your browser cache for future use. If you already imported previously, this will refresh them to the latest version. 
-5. Select "Tamtaro Complete SEL Setup". Read through the various options to customize. Leaving everything default gets you my recommended setup. 
+
+4. "Confirm Import" to import all templates available from me. This will save them into your browser cache for future use. If you already imported previously, this will refresh them to the latest version.
+5. Select "Tamtaro Complete SEL Setup". Read through the various options to customize. Leaving everything default gets you my recommended setup.
 6. Follow the prompt to configure your debrid credentials. API Keys already configured inside AIOStreams will be prefilled.
 7. Enter your TMDB/TVDB credentials for Title Matching and various other features.
 8. Load Template, Save your AIOStreams, install into stremio.
 9. Go to end of this page for instructions on how to setup your catalogs via AIOMetadata addon (which is a separate addon from AIOStrems).
 
-  > [!NOTE]
+> [!NOTE]
 > To further enhance your sorting, Vidhin's regex template is now incorporated, which tags and scores streams based on the quality of the release groups and other attributes. Check his [GitHub](https://github.com/Vidhin05/Releases-Regex) for more instructions on further customization
 
 ## 🔧 Optional SELs
 
-While my default SEL setup is a complete setup, it can be tweaked further for various specific needs. Over the months I've shared these SELs with you guys on Discord, or found them useful, shared by others. Most of these are Excluded Stream Expressions, which are meant to be used *before* my ESEs/synced url. Some are Included expressions, which is meant to bypass certain streams before filtering. Some are Required expressions, which is meant to provide one last filtering that will run *after* all previous filtering. Where to put each optional SEL is important and will be noted. It's recommended to use the Template Wizard as that will automatically adjust and place the SELs appropriately for your config. A lot of these SELs is incoropated into the template already.
+While my default SEL setup is a complete setup, it can be tweaked further for various specific needs. Over the months I've shared these SELs with you guys on Discord, or found them useful, shared by others. Most of these are Excluded Stream Expressions, which are meant to be used _before_ my ESEs/synced url. Some are Included expressions, which is meant to bypass certain streams before filtering. Some are Required expressions, which is meant to provide one last filtering that will run _after_ all previous filtering. Where to put each optional SEL is important and will be noted. It's recommended to use the Template Wizard as that will automatically adjust and place the SELs appropriately for your config. A lot of these SELs is incoropated into the template already.
 
-These go into Excluded *before* all my Excluded SELs, by adding a box yourself above my synced url:
-  - __☑ ɴᴢʙ-Only Filter__: A UsenetStreamer filter for those that only want to see health checked results from UsenetStreamer. The SEL line assumes your UsenetStreamer addon is named US, USN, UsenetStreamer, or Usenet Streamer, so avoid naming any other addon with those names.
-	- ```text
-  	  /*☑ ɴᴢʙ-Only Filter*/ negate(addon(message(streams,'includes','✅','🧝'),'US','UNS','Usenet Streamer','UsenetStreamer'),addon(streams,'US','UNS','Usenet Streamer','UsenetStreamer'))
-  - __DV-Only Non-Remux Filter__: remove some DV Only streams that give playback issues (purple screen) on some devices. I use this one as my pc doesn't render DV Profile 5 files very well (particularly from Apple TV Web-DLs)
-    - ```text
-      /*DV Only Non-Remux*/ isAnime?[]:negate(merge(quality(streams,'BluRay REMUX'),releaseGroup(streams, 'Flights'),regexMatched(streams, 'Hulu')),visualTag(streams,'DV Only'))
-  - __TorBox Download Limit__: TB Essential and Standard have a max uncached download size of 200GB, which is increased to 1TB for TB Pro. Use the appropriate SEL if you're with TB.
-    - ```text
-      /*TB Non-Pro Download Limit*/ size(uncached(service(streams, 'torbox')), '200GB')
-    - ```text
-      /*TB Pro Download Limit*/ size(uncached(service(streams, 'torbox')), '1TB')
-  - __Bitrate Hardcap for Mobile__: Unlike the one below, where if no results for 4k or 1080p at bitrate cap, it fallbacks to show higher bitrate anyway. This SEL however will set a hardcap based on your mobile internet connection. Will assume 4-5G mobile: 4K @ 8Mbps, 1080p @ 3Mbps, 720p or lower @ 2Mbps
-    - ```text
-      /*Bitrate Hardcap*/
-		merge(bitrate(resolution(streams, '2160p'), '8Mbps'),
-		  bitrate(resolution(streams, '1440p', '1080p'), '3Mbps'),
-		  bitrate(resolution(streams, '720p','576p', '480p', '360p', '240p', 'Unknown'),'2Mbps'))
-  - __Bitrate Softcap for Travel__: A bitrate filter for a bandwidth conscious setup. It's a smart bitrate filter that gets applied only if there are >5 results found within each bitrate range, which dynamically increases (to the max bitrate available) until >5 results are found for that resolution. The bitrate range was chosen somewhat arbitrarily, with a mindset of not chasing for best quality but for best bandwidth/quality in practice. This is not a flat hard cap on bitrate, since I like to still see results than no results at all even if they're too big to watch on mobile.
-     - <details>
-       <summary>Bitrate softcap for Travel</summary>
-                         
-			/*Bitrate Softcap for Travel*/
-			merge(
-			    bitrate(resolution(streams,'2160p'),
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),1,'6Mbps'))>5?'6Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),1,'9Mbps'))>5?'9Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),1,'12Mbps'))>5?'12Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),1,'15Mbps'))>5?'15Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),1,'20Mbps'))>5?'20Mbps':
-			max(values(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),'bitrate'))
-			),
-			bitrate(resolution(streams,'1440p','1080p'),
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),1,'6Mbps'))>5?'6Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),1,'9Mbps'))>5?'9Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),1,'12Mbps'))>5?'12Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),1,'15Mbps'))>5?'15Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),1,'20Mbps'))>5?'20Mbps':
-			max(values(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),'bitrate'))
-			),
-			bitrate(resolution(streams,'720p'),
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),1,'6Mbps'))>5?'6Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),1,'9Mbps'))>5?'9Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),1,'12Mbps'))>5?'12Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),1,'15Mbps'))>5?'15Mbps':
-			count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),1,'20Mbps'))>5?'20Mbps':
-			max(values(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),'bitrate'))
-			))
-</details>
+These go into Excluded _before_ all my Excluded SELs, by adding a box yourself above my synced url:
 
-These go into Excluded *after* all my Excluded SELs:
-  - __Global Result Limit__: After all my filtering SELs have ran you get left off with 3 of each category, totalling about 20 streams in all. You can simply cut this number down to any number you want, I will go with 6 to get even amount from 2 categories (eg. 3 x 4k Remux + 3 x 4k Bluray). Library and Seadex results are not counted.
-    - ```text
-      /*Global Result Limit: 6*/slice(negate(merge(library(streams), cached(seadex(streams))), streams), 6)
-  - __Global Result Limit__: Same as above, to be used by folks with torbox usenet only. This passthroughs 6 non-usenet and 6 usenet results.
-    - ```text
-      /*Global Result Limit: 6*/ merge(slice(negate(merge(library(streams),cached(seadex(streams))), (type(streams, 'debrid', 'http', 'p2p'))), 6), slice(negate(merge(library(streams),seadex(streams)), (type(streams, 'usenet'))), 6))
-These go into Included Stream Expressions, order doesn't matter here:
-  - __Language Passthrough__: If you want some amount of your results in another language to always show up, skipping mostly all filters, then this is the SEL for you. Change `yourLanguage` to whatever your language you want to see ~ 5 streams of, these streams will bypass title matching & our excluded SELs (`title`, `excluded`).  We're not bypassing a lot of other filters like deduplication so you may see less than 5. This is the full list of passthrough filters you can skip: `filter,dedup, limit, excluded, required, title, year, episode, digitalRelease, language`. Make multiple of these SELs for other language passthroughs if desired. Can adjust the number from 5 to whatever you want. If you still don't see your language in results, it's most likely because your addons didn't return any.
-    - ```text
-      /*yourLanguage*/ passthrough(slice(language(merge(cached(streams), type(streams, 'usenet')) 'yourLanguage'), 0, 5), 'title', 'excluded')
-  - __Addon Passthrough__: This SEL will passthrough cached results (or uncached usenet) from `yourAddon` so that they skip the Excluded Stream Expression filters (`excluded`). Same as above, adjust the number 5 to 99+ if you want to passthrough all results. Adjust the passthrough filters if you want to skip more stages, see above for full list.
-    - ```cached
-      /*yourAddon*/ passthrough(slice(addon(merge(cached(streams), type(streams, 'usenet')), 'yourAddon'), 0, 5), 'excluded')
+- **☑ ɴᴢʙ-Only Filter**: A UsenetStreamer filter for those that only want to see health checked results from UsenetStreamer. The SEL line assumes your UsenetStreamer addon is named US, USN, UsenetStreamer, or Usenet Streamer, so avoid naming any other addon with those names.
+  - ```text
+    /*☑ ɴᴢʙ-Only Filter*/ negate(addon(message(streams,'includes','✅','🧝'),'US','UNS','Usenet Streamer','UsenetStreamer'),addon(streams,'US','UNS','Usenet Streamer','UsenetStreamer'))
+    ```
+- **DV-Only Non-Remux Filter**: remove some DV Only streams that give playback issues (purple screen) on some devices. I use this one as my pc doesn't render DV Profile 5 files very well (particularly from Apple TV Web-DLs)
+  - ```text
+    /*DV Only Non-Remux*/ isAnime?[]:negate(merge(quality(streams,'BluRay REMUX'),releaseGroup(streams, 'Flights'),regexMatched(streams, 'Hulu')),visualTag(streams,'DV Only'))
+    ```
+- **TorBox Download Limit**: TB Essential and Standard have a max uncached download size of 200GB, which is increased to 1TB for TB Pro. Use the appropriate SEL if you're with TB.
+  - ```text
+    /*TB Non-Pro Download Limit*/ size(uncached(service(streams, 'torbox')), '200GB')
+    ```
+  - ```text
+    /*TB Pro Download Limit*/ size(uncached(service(streams, 'torbox')), '1TB')
+    ```
+- **Bitrate Hardcap for Mobile**: Unlike the one below, where if no results for 4k or 1080p at bitrate cap, it fallbacks to show higher bitrate anyway. This SEL however will set a hardcap based on your mobile internet connection. Will assume 4-5G mobile: 4K @ 8Mbps, 1080p @ 3Mbps, 720p or lower @ 2Mbps
+  - ```text
+    /*Bitrate Hardcap*/
+    merge(bitrate(resolution(streams, '2160p'), '8Mbps'),
+      bitrate(resolution(streams, '1440p', '1080p'), '3Mbps'),
+      bitrate(resolution(streams, '720p','576p', '480p', '360p', '240p', 'Unknown'),'2Mbps'))
+    ```
+- **Bitrate Softcap for Travel**: A bitrate filter for a bandwidth conscious setup. It's a smart bitrate filter that gets applied only if there are >5 results found within each bitrate range, which dynamically increases (to the max bitrate available) until >5 results are found for that resolution. The bitrate range was chosen somewhat arbitrarily, with a mindset of not chasing for best quality but for best bandwidth/quality in practice. This is not a flat hard cap on bitrate, since I like to still see results than no results at all even if they're too big to watch on mobile. - <details>
+  <summary>Bitrate softcap for Travel</summary>
+      		/*Bitrate Softcap for Travel*/
+      		merge(
+      		    bitrate(resolution(streams,'2160p'),
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),1,'6Mbps'))>5?'6Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),1,'9Mbps'))>5?'9Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),1,'12Mbps'))>5?'12Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),1,'15Mbps'))>5?'15Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),1,'20Mbps'))>5?'20Mbps':
+      		max(values(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'2160p'),'bitrate'))
+      		),
+      		bitrate(resolution(streams,'1440p','1080p'),
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),1,'6Mbps'))>5?'6Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),1,'9Mbps'))>5?'9Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),1,'12Mbps'))>5?'12Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),1,'15Mbps'))>5?'15Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),1,'20Mbps'))>5?'20Mbps':
+      		max(values(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'1440p','1080p'),'bitrate'))
+      		),
+      		bitrate(resolution(streams,'720p'),
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),1,'6Mbps'))>5?'6Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),1,'9Mbps'))>5?'9Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),1,'12Mbps'))>5?'12Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),1,'15Mbps'))>5?'15Mbps':
+      		count(bitrate(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),1,'20Mbps'))>5?'20Mbps':
+      		max(values(resolution(merge(cached(streams), type(streams, 'p2p','http','usenet','stremio-usenet')),'720p'),'bitrate'))
+      		))
+  </details>
 
-  - __DV Passthrough__: This will passthrough up to 5 DV streams in 4k/1080p, and if there are less than 5 of such present, it will also passthrough up to 5 DV streams in 720p. Specifically, my exclusion SELs won't work on these DV streams. Adjust 5 to 99+ if you want to passthrough all.
-    - ```text
-      /*DV Passthrough*/ count(resolution(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), '2160p', '1080p')) > 5 ? passthrough(slice(resolution(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), '2160p', '1080p'), 0, 5), 'excluded') : passthrough(slice(resolution(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), '2160p', '1080p', '720p'), 0, 5), 'excluded')
-  - __DV+HDR Passthrough__: This will passthrough up to 5 DV+HDR streams in 4k/1080p, and if there are less than 5 of such present, it will also passthrough up to 5 more in 720p. Specifically, my exclusion SELs won't work on these DV streams. Adjust 5 to 99+ if you want to passthrough all.
-    - ```text
-      /*DV+HDR Passthrough*/ count(resolution(visualTag(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), 'HDR', 'HDR10','HDR10+'), '2160p', '1080p')) > 5 ? passthrough(slice(resolution(visualTag(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), 'HDR', 'HDR10','HDR10+'), '2160p', '1080p'), 0, 5), 'excluded') : passthrough(slice(resolution(visualTag(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), 'HDR', 'HDR10','HDR10+'), '2160p', '1080p', '720p'), 0, 5), 'excluded')
-  - __SDR Passthrough__: This will passthrough up to 5 non-DV/HDR (aka SDR) streams in 4k/1080p, and if there are less than 5 of such present, it will also passthrough up to 5 more in 720p. Specifically, my exclusion SELs won't work on these DV streams. Adjust 5 to 99+ if you want to passthrough all.
-    - ```text
-      /*SDR Passthrough*/ count(resolution(negate(merge(visualTag(streams, 'HDR', 'HDR10', 'HDR10+', 'DV')), visualTag(merge(cached(streams), type(streams, 'usenet')), 'SDR', 'HLG', '10bit', 'IMAX', 'Unknown')), '2160p', '1080p')) > 5 ? passthrough(slice(resolution(negate(merge(visualTag(streams, 'HDR', 'HDR10', 'HDR10+', 'DV')), visualTag(merge(cached(streams), type(streams, 'usenet')), 'SDR', 'HLG', '10bit', 'IMAX', 'Unknown')), '2160p', '1080p'), 0, 5), 'excluded') : passthrough(slice(resolution(negate(merge(visualTag(streams, 'HDR', 'HDR10', 'HDR10+', 'DV')), visualTag(merge(cached(streams), type(streams, 'usenet')), 'SDR', 'HLG', '10bit', 'IMAX', 'Unknown')), '2160p', '1080p', '720p'), 0, 5), 'excluded')
+These go into Excluded _after_ all my Excluded SELs:
+
+- **Global Result Limit**: After all my filtering SELs have ran you get left off with 3 of each category, totalling about 20 streams in all. You can simply cut this number down to any number you want, I will go with 6 to get even amount from 2 categories (eg. 3 x 4k Remux + 3 x 4k Bluray). Library and Seadex results are not counted.
+  - ```text
+    /*Global Result Limit: 6*/slice(negate(merge(library(streams), cached(seadex(streams))), streams), 6)
+    ```
+- **Global Result Limit**: Same as above, to be used by folks with torbox usenet only. This passthroughs 6 non-usenet and 6 usenet results. - ```text
+  /_Global Result Limit: 6_/ merge(slice(negate(merge(library(streams),cached(seadex(streams))), (type(streams, 'debrid', 'http', 'p2p'))), 6), slice(negate(merge(library(streams),seadex(streams)), (type(streams, 'usenet'))), 6))
+  These go into Included Stream Expressions, order doesn't matter here:
+- **Language Passthrough**: If you want some amount of your results in another language to always show up, skipping mostly all filters, then this is the SEL for you. Change `yourLanguage` to whatever your language you want to see ~ 5 streams of, these streams will bypass title matching & our excluded SELs (`title`, `excluded`). We're not bypassing a lot of other filters like deduplication so you may see less than 5. This is the full list of passthrough filters you can skip: `filter,dedup, limit, excluded, required, title, year, episode, digitalRelease, language`. Make multiple of these SELs for other language passthroughs if desired. Can adjust the number from 5 to whatever you want. If you still don't see your language in results, it's most likely because your addons didn't return any.
+  - ```text
+    /*yourLanguage*/ passthrough(slice(language(merge(cached(streams), type(streams, 'usenet')) 'yourLanguage'), 0, 5), 'title', 'excluded')
+    ```
+- **Addon Passthrough**: This SEL will passthrough cached results (or uncached usenet) from `yourAddon` so that they skip the Excluded Stream Expression filters (`excluded`). Same as above, adjust the number 5 to 99+ if you want to passthrough all results. Adjust the passthrough filters if you want to skip more stages, see above for full list.
+  - ```cached
+    /*yourAddon*/ passthrough(slice(addon(merge(cached(streams), type(streams, 'usenet')), 'yourAddon'), 0, 5), 'excluded')
+    ```
+
+- **DV Passthrough**: This will passthrough up to 5 DV streams in 4k/1080p, and if there are less than 5 of such present, it will also passthrough up to 5 DV streams in 720p. Specifically, my exclusion SELs won't work on these DV streams. Adjust 5 to 99+ if you want to passthrough all.
+  - ```text
+    /*DV Passthrough*/ count(resolution(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), '2160p', '1080p')) > 5 ? passthrough(slice(resolution(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), '2160p', '1080p'), 0, 5), 'excluded') : passthrough(slice(resolution(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), '2160p', '1080p', '720p'), 0, 5), 'excluded')
+    ```
+- **DV+HDR Passthrough**: This will passthrough up to 5 DV+HDR streams in 4k/1080p, and if there are less than 5 of such present, it will also passthrough up to 5 more in 720p. Specifically, my exclusion SELs won't work on these DV streams. Adjust 5 to 99+ if you want to passthrough all.
+  - ```text
+    /*DV+HDR Passthrough*/ count(resolution(visualTag(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), 'HDR', 'HDR10','HDR10+'), '2160p', '1080p')) > 5 ? passthrough(slice(resolution(visualTag(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), 'HDR', 'HDR10','HDR10+'), '2160p', '1080p'), 0, 5), 'excluded') : passthrough(slice(resolution(visualTag(visualTag(merge(cached(streams), type(streams, 'usenet')), 'DV'), 'HDR', 'HDR10','HDR10+'), '2160p', '1080p', '720p'), 0, 5), 'excluded')
+    ```
+- **SDR Passthrough**: This will passthrough up to 5 non-DV/HDR (aka SDR) streams in 4k/1080p, and if there are less than 5 of such present, it will also passthrough up to 5 more in 720p. Specifically, my exclusion SELs won't work on these DV streams. Adjust 5 to 99+ if you want to passthrough all.
+  - ```text
+    /*SDR Passthrough*/ count(resolution(negate(merge(visualTag(streams, 'HDR', 'HDR10', 'HDR10+', 'DV')), visualTag(merge(cached(streams), type(streams, 'usenet')), 'SDR', 'HLG', '10bit', 'IMAX', 'Unknown')), '2160p', '1080p')) > 5 ? passthrough(slice(resolution(negate(merge(visualTag(streams, 'HDR', 'HDR10', 'HDR10+', 'DV')), visualTag(merge(cached(streams), type(streams, 'usenet')), 'SDR', 'HLG', '10bit', 'IMAX', 'Unknown')), '2160p', '1080p'), 0, 5), 'excluded') : passthrough(slice(resolution(negate(merge(visualTag(streams, 'HDR', 'HDR10', 'HDR10+', 'DV')), visualTag(merge(cached(streams), type(streams, 'usenet')), 'SDR', 'HLG', '10bit', 'IMAX', 'Unknown')), '2160p', '1080p', '720p'), 0, 5), 'excluded')
+    ```
 
 ---
+
 ## ⚙️ What’s Included for AIOMetadata
 
-These are setup configs to use with AIOMetadata. It is a powerful tool for all things metadata and catalogs. If you're not sure where to start, pick an AIOMetadata instance from [the list of trusted public instances](https://status.dinsden.top/status/stremio-addons)  or use the [Elfhosted instance](https://aiometadata.elfhosted.com/configure/). You can't go wrong with either choice.
+These are setup configs to use with AIOMetadata. It is a powerful tool for all things metadata and catalogs. If you're not sure where to start, pick an AIOMetadata instance from [the list of trusted public instances](https://status.dinsden.top/status/stremio-addons) or use the [Elfhosted instance](https://aiometadata.elfhosted.com/configure/). You can't go wrong with either choice.
 
 > [!NOTE]
 > My previous AIOStreams template does not include any catalogs. This is where AIOMetadata comes in. It is a separate addon from AIOStreams, installed directly into Stremio (or via StremThru Side Kick), and is the main place most of us like to keep our catalogs for Stremio!
 
-
-| Complete config | Description | Download |
-| :-- | :-- | :-- |
-| **With Anime Catalogs** | Complete configuration with anime metadata preset, TV, movies, and anime catalogs. Huge props to Cedya, Snoak \& Mr Professor for their awesome lists! | [Direct Link](https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOMetadata%20Configs/Tamtaro-aiometadata-config-with-anime.json) [Mobile Link](https://www.dropbox.com/scl/fi/7mfhmz9ptddrqtfqegqeu/Tamtaro-aiometadata-config-with-anime.json?rlkey=3jdolg2pjyxf1ju5axg5vnoiu&st=gzvkid51&dl=1)|
-| **Without Anime Catalogs** | Complete configuration for TV and movies catalogs. No anime. | [Direct Link](https://raw.githubusercontent.com/Tam-Taro/SEL-Filtering-and-Sorting/refs/heads/main/AIOMetadata%20Configs/Tamtaro-aiometadata-config-without-anime.json) [Mobile Link](https://www.dropbox.com/scl/fi/cl6b1z4nof1150aagpoa8/Tamtaro-aiometadata-config-without-anime.json?rlkey=d95gxqr85tna3ujqa933zzhj7&st=wsekixtd&dl=1)|
+| Complete config            | Description                                                                                                                                            | Download                                                                                                                                                                                                                                                                                                                                    |
+| :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **With Anime Catalogs**    | Complete configuration with anime metadata preset, TV, movies, and anime catalogs. Huge props to Cedya, Snoak \& Mr Professor for their awesome lists! | [Direct Link](https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOMetadata%20Configs/Tamtaro-aiometadata-config-with-anime.json) [Mobile Link](https://www.dropbox.com/scl/fi/7mfhmz9ptddrqtfqegqeu/Tamtaro-aiometadata-config-with-anime.json?rlkey=3jdolg2pjyxf1ju5axg5vnoiu&st=gzvkid51&dl=1)       |
+| **Without Anime Catalogs** | Complete configuration for TV and movies catalogs. No anime.                                                                                           | [Direct Link](https://raw.githubusercontent.com/dvoin3scu/SEL-Filtering-and-Sorting/refs/heads/main/AIOMetadata%20Configs/Tamtaro-aiometadata-config-without-anime.json) [Mobile Link](https://www.dropbox.com/scl/fi/cl6b1z4nof1150aagpoa8/Tamtaro-aiometadata-config-without-anime.json?rlkey=d95gxqr85tna3ujqa933zzhj7&st=wsekixtd&dl=1) |
 
 ## ✨ Release Notes
 
@@ -935,16 +991,16 @@ This import will give you catalogs and meta support for Stremio, to be installed
 
 1. **Integrations tab** → Obtain and enter your TMDB, TVDB, MDBList, and Gemini APIs. Use `t0-free-rpdb` for RPDB posters or obtain TOP API for alternate TOP posters. Gemini is needed for AI Search. Fanart.tv API Key is optional. Hit the `Test All Keys` button to ensure they're all ✅.
 2. **Configuration tab** → Import Configuration → Import one of my JSON files.
-    - Feel free to edit/hide/delete/import various catalogs in Catalogs tab to your liking. Just note that the current config already has close to the max number of catalogs stremio will allow in one AIOMetadata install. See below for more on this.
-    - Adjust `Display Language` inside AIOMetadata under General tab if you're not using default English.
+   - Feel free to edit/hide/delete/import various catalogs in Catalogs tab to your liking. Just note that the current config already has close to the max number of catalogs stremio will allow in one AIOMetadata install. See below for more on this.
+   - Adjust `Display Language` inside AIOMetadata under General tab if you're not using default English.
 3. **Configuration tab** → Save Configuration → Enter a password to save your configuration (if you haven't made an account before) → Install the addon directly into Stremio. **Note**: If you encounter `AddonsPushedToAPI - Max descriptor size reached` error, try step 4 otherwise if your AIOM installed fine directly into stremio, skip to step 5.
-4. Copy your `Install URL`. Go to [StremThru Side Kick](https://stremthru.13377001.xyz/stremio/sidekick/), log in there using your Stremio account and use the Install button there to install the addon with the AIOMetadata URL. This *may help* bypass the `AddonsPushedToAPI - Max descriptor size reached` error; otherwise disable some catalogs to reduce size or see below "How to set up 2 AIOMetadata for more catalogs".
+4. Copy your `Install URL`. Go to [StremThru Side Kick](https://stremthru.13377001.xyz/stremio/sidekick/), log in there using your Stremio account and use the Install button there to install the addon with the AIOMetadata URL. This _may help_ bypass the `AddonsPushedToAPI - Max descriptor size reached` error; otherwise disable some catalogs to reduce size or see below "How to set up 2 AIOMetadata for more catalogs".
 5. Go to [https://cinebye.dinsden.top](https://cinebye.dinsden.top), load up your account and remove all three Cinemeta features (Search, Catalogs, and Meta). Then scroll down to the bottom of Cinebye and re-order your addons so that 1. `Cinemeta (cinebyed)` 2. `AIOMetadata` 3. `Rest of addons (AIOStreams, subtitle addons, etc)`. Finally, save the changes by clicking `Sync to Stremio`. The re-ordering can also be done inside StremThru Side Kick under "Move" mode.
 
 > [!NOTE]
 > If you make any catalog changes in your AIOMetadata, you will need to re-install AIOMetadata for it to be updated inside Stremio. Instead of re-installing and re-ordering your AIOMetadata again each time, you should use StremThru Side Kick "reload" feature, which effectively does the re-install in one click of a button.
 
-*Some of you seem to want more catalogs*. My config for no anime has most of the "western" content catalogs from AIOMetadata/Snoak's MDBLists enabled and still stayed within the size limit allowed by Stremio for 1 AIOM's UUID installation. For the config with anime, I had to disable half of the "western" catalogs to accommodate for anime catalogs as well. Stremio will only allow around ~60 catalogs per AIOM config before you see the `AddonsPushedToAPI - Max descriptor size reached` error during installation.
+_Some of you seem to want more catalogs_. My config for no anime has most of the "western" content catalogs from AIOMetadata/Snoak's MDBLists enabled and still stayed within the size limit allowed by Stremio for 1 AIOM's UUID installation. For the config with anime, I had to disable half of the "western" catalogs to accommodate for anime catalogs as well. Stremio will only allow around ~60 catalogs per AIOM config before you see the `AddonsPushedToAPI - Max descriptor size reached` error during installation.
 
 ### ➕ More Catalogs with 2 AIOMs
 
